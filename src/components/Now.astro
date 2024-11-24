@@ -5,13 +5,24 @@ import Pulse from "./Pulse.astro";
 
 <Card colSpan="md:col-span-1" rowSpan="md:row-span-2">
   <div class="flex justify-between w-full items-start mb-2">
-    <div class="flex flex-col">
-      <h2>Now</h2>
-      <a href="https://sive.rs/nowff" target="_blank">
+    <h2 class="text-xl font-bold m-0 z-20">Now</h2>
+    <!-- <a href="https://sive.rs/nowff" target="_blank">
         <span class="text-xs text-gray-500 cursor-pointer">what's that ?</span>
-      </a>
-    </div>
+    </a> -->
     <Pulse />
   </div>
-  <p class="text-xs">Currently working as freelancer</p>
+  <p class="text-xs">
+    I'm currently doing my master thesis at <a
+      href="https://informal.systems/"
+      target="_blank"
+      class="text-primary-600">Informal Systems</a
+    >, and finalizing the v1 of <a
+      href="https://x.com/MetacubeGames"
+      target="_blank"
+      class="text-primary-600">Metacube</a
+    >.
+  </p>
+  <a href="now" class="text-xs text-gray-500 cursor-pointer"
+    >Click here for more details</a
+  >
 </Card>

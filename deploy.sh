@@ -1,0 +1,12 @@
+#!/bin/bash
+
+trap 'exit 1' ERR
+
+cd "$(dirname "$0")"
+git stash
+git pull
+docker build -t portfolio:latest -f Dockerfile .
+docker stop portfolio || true
+docker run -d --rm -p 3000:3000 --name portfolio portfolio:latest
+
+trap - ERR

@@ -15,6 +15,7 @@
     "@astrojs/sitemap": "^3.1.6",
     "@astrojs/solid-js": "^4.4.2",
     "@astrojs/svelte": "^5.7.1",
+    "@iconify-json/academicons": "^1.2.1",
     "@iconify-json/ri": "^1.1.21",
     "@rive-app/canvas": "^2.19.3",
     "astro": "^4.15.7",
@@ -26,6 +27,7 @@
     "lenis": "^1.1.6",
     "mdast-util-to-string": "^4.0.0",
     "motion": "^10.18.0",
+    "pnpm": "^9.12.1",
     "reading-time": "^1.5.0",
     "solid-js": "^1.8.18",
     "svelte": "^4.2.18"
