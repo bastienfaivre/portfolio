@@ -385,9 +385,9 @@ Make sure that the message structure is the same on the frontend and backend to 
 I hope that this article provided you with a comprehensive understanding of the signatures on Starknet and helped you implement it in your applications. If you have any questions or feedback, feel free to comment or reach out to me on [Twitter](https://twitter.com/BastienFaivre) or [GitHub](https://github.com/BastienFaivre). Thank you for reading! 
 
 Sources:
-- [https://book.starknet.io/ch04-00-account-abstraction.html](https://book.starknet.io/ch04-00-account-abstraction.html)
+- [Starknet book](https://book.starknet.io/ch04-00-account-abstraction.html)
 - [StarknetJS Doc Signature](https://www.starknetjs.com/docs/guides/signature/)
-- [https://docs.starknet.io/architecture-and-concepts/accounts/introduction/](https://docs.starknet.io/architecture-and-concepts/accounts/introduction/)
-- [https://docs.openzeppelin.com/contracts-cairo/0.4.0/accounts#isvalidsignature](https://docs.openzeppelin.com/contracts-cairo/0.4.0/accounts#isvalidsignature)
+- [Starknet Accounts Introduction](https://docs.starknet.io/architecture-and-concepts/accounts/introduction/)
+- [Openzeppeling Accounts Contract](https://docs.openzeppelin.com/contracts-cairo/0.4.0/accounts#isvalidsignature)
 - [Elliptic Curve Digital Signature Algorithm (Wikipedia)](https://en.wikipedia.org/wiki/Elliptic_Curve_Digital_Signature_Algorithm)
-- [https://eips.ethereum.org/EIPS/eip-712](https://eips.ethereum.org/EIPS/eip-712)
+- [Ethereum EIP-712](https://eips.ethereum.org/EIPS/eip-712)
