@@ -18,24 +18,24 @@ const { frontmatter } = Astro.props;
   frontmatter={frontmatter}
   slug={slug}
   page="blog"
-  title={`Bastien Faivre - ${frontmatter.title}`}
+  title={`Gianmarco Cavallo - ${frontmatter.title}`}
   description={frontmatter.description}
 >
   <main class="mx-auto max-w-3xl w-full h-screen p-8 text-neutral-100">
     <a
       href="/blog"
-      class="text-white bg-neutral-900 hover:bg-neutral-800 px-4 py-2 border-1 border-solid border-neutral-600 rounded-lg mb-8"
+      class="text-neutral-100 bg-neutral-900 hover:bg-neutral-800 px-4 py-2 border-1 border-solid border-neutral-600 rounded-lg mb-8"
       >Back</a
     >
-    <div class="my-10">
-      <h1 class="text-5xl font-semibold">{frontmatter.title}</h1>
-      <div class="flex justify-between pt-4 text-gray-500 text-sm">
-        <p>{formatDate(new Date(frontmatter.pubDate))}</p>
-        <p>{frontmatter.minutesRead}</p>
-      </div>
+    <h1 class="text-4xl font-bold mb-4 text-neutral-100">
+      {frontmatter.title}
+    </h1>
+    <div class="flex justify-between pt-4 text-gray-500 text-sm">
+      <p>{formatDate(new Date(frontmatter.pubDate))}</p>
+      <p>{frontmatter.minutesRead}</p>
     </div>
     <article
-      class="prose prose-p:text-primary-600 prose-slate prose-invert pb-8"
+      class="text-neutral-200 text-xl text-justify prose prose-p:text-red-500 prose-slate prose-invert"
     >
       <slot />
     </article>

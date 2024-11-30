@@ -386,8 +386,8 @@ I hope that this article provided you with a comprehensive understanding of the 
 
 Sources:
 - [https://book.starknet.io/ch04-00-account-abstraction.html](https://book.starknet.io/ch04-00-account-abstraction.html)
-- [https://www.starknetjs.com/docs/guides/signature/](https://www.starknetjs.com/docs/guides/signature/)
+- [StarknetJS Doc Signature](https://www.starknetjs.com/docs/guides/signature/)
 - [https://docs.starknet.io/architecture-and-concepts/accounts/introduction/](https://docs.starknet.io/architecture-and-concepts/accounts/introduction/)
 - [https://docs.openzeppelin.com/contracts-cairo/0.4.0/accounts#isvalidsignature](https://docs.openzeppelin.com/contracts-cairo/0.4.0/accounts#isvalidsignature)
-- [https://en.wikipedia.org/wiki/Elliptic_Curve_Digital_Signature_Algorithm](https://en.wikipedia.org/wiki/Elliptic_Curve_Digital_Signature_Algorithm)
+- [Elliptic Curve Digital Signature Algorithm (Wikipedia)](https://en.wikipedia.org/wiki/Elliptic_Curve_Digital_Signature_Algorithm)
 - [https://eips.ethereum.org/EIPS/eip-712](https://eips.ethereum.org/EIPS/eip-712)
