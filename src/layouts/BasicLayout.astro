@@ -24,12 +24,12 @@ const schema =
         "@context": "http://schema.org",
         "@type": "Person",
         name: "Bastien",
-        url: "https://bastienfaivre.ch",
+        url: "https://bastienfaivre.com",
         sameAs: [
           "https://www.linkedin.com/in/bastienfaivre",
           "https://github.com/BastienFaivre",
         ],
-        image: "https://bastienfaivre.ch/me.webp",
+        image: "https://bastienfaivre.com/me.webp",
         jobTitle: "Software Engineer",
         worksFor: {
           "@type": "Organization",
@@ -50,15 +50,15 @@ const schema =
         "@type": "BlogPosting",
         mainEntityOfPage: {
           "@type": "WebPage",
-          "@id": `https://bastienfaivre.ch/blog/${slug}`,
+          "@id": `https://bastienfaivre.com/blog/${slug}`,
         },
         headline: frontmatter?.title || title,
         description: frontmatter?.description || title,
-        image: "https://bastienfaivre.ch/me.webp", //TODO: dynamic
+        image: "https://bastienfaivre.com/me.webp", //TODO: dynamic
         author: {
           "@type": "Person",
           name: "Bastien",
-          url: "https://bastienfaivre.ch",
+          url: "https://bastienfaivre.com",
           sameAs: [
             "https://www.linkedin.com/in/bastienfaivre",
             "https://github.com/BastienFaivre",
@@ -69,7 +69,7 @@ const schema =
           name: "Bastien",
           logo: {
             "@type": "ImageObject",
-            url: "https://bastienfaivre.ch/me.webp",
+            url: "https://bastienfaivre.com/me.webp",
           },
         },
         datePublished: frontmatter?.pubDate || new Date().toISOString(),
@@ -94,7 +94,7 @@ const schema =
     <meta property="og:url" content={Astro.url.origin} />
     <meta
       property="og:image"
-      content={image || "https://bastienfaivre.ch/me.webp"}
+      content={image || "https://bastienfaivre.com/me.webp"}
     />
     <!-- Basic Twitter Card tags -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -102,7 +102,7 @@ const schema =
     <meta name="twitter:description" content={description} />
     <meta
       name="twitter:image"
-      content={image || "https://bastienfaivre.ch/me.webp"}
+      content={image || "https://bastienfaivre.com/me.webp"}
     />
 
     <link rel="preconnect" href="https://cdn.fontshare.com" />

@@ -12,13 +12,13 @@ import svelte from "@astrojs/svelte";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://bastienfaivre.ch/",
+  site: "https://bastienfaivre.com/",
   integrations: [
     sitemap(),
     robotsTxt({
       sitemap: [
-        "https://bastienfaivre.ch/sitemap-index.xml",
-        "https://bastienfaivre.ch/sitemap-0.xml",
+        "https://bastienfaivre.com/sitemap-index.xml",
+        "https://bastienfaivre.com/sitemap-0.xml",
       ],
     }),
     solidJs(),
