@@ -8,6 +8,10 @@ category: "technical"
 
 This article was originally published on [dev.to](https://dev.to/bastienfaivre/a-starknet-transactions-batcher-1hpk) on December 22, 2024.
 
+## CHANGELOG
+
+- 25.12.2024: Updated Go code due to breaking changes in the starknet.go library (>= v0.7.3)
+
 ## Abstract
 
 This article presents the transactions batcher used in [Metacube](https://x.com/MetacubeGames) to send NFTs earned by players instantly. It explains the batcher's scalable actor-based architecture and provides a detailed implementation in Go.
@@ -231,7 +235,7 @@ func (b *Batcher) runSendActor(txnDataPairChan <-chan TxnDataPair) {
 		}
 
         	// Send the transaction to the Starknet network
-		resp, err := b.accnt.AddInvokeTransaction(
+		resp, err := b.accnt.SendTransaction(
 			context.Background(),
 			&txn,
 		)
