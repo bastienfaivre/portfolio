@@ -3,10 +3,32 @@ import Card from "./Card/index.astro";
 import { LINKS } from "../lib/constants";
 ---
 
-<Card colSpan="md:col-span-2" rowSpan="md:row-span-2" title="Work In Progress">
+<Card colSpan="md:col-span-2" rowSpan="md:row-span-2" title="Hot Stuff">
     <div class="flex flex-col gap-2 mt-2">
-        <div class="text-sm font-light">
-            <p>Still wondering what to put here...</p>
+        <div class="font-light">
+            <ul>
+                <li>
+                    - Working on <a
+                        href="https://github.com/informalsystems/malachite"
+                        target="_blank"
+                        class="text-primary-600">Malachite</a
+                    >, a flexible BFT consensus engine in Rust.
+                </li>
+                <li>
+                    - <a
+                        href="https://play.metacube.games/"
+                        target="_blank"
+                        class="text-primary-600">Metacube V1</a
+                    > is live! Come play with us!
+                </li>
+                <li>
+                    - Check out my <a
+                        href="https://bastienfaivre.com/files/master-thesis.pdf"
+                        target="_blank"
+                        class="text-primary-600">Master Thesis</a
+                    >.
+                </li>
+            </ul>
         </div>
     </div>
 </Card>
