@@ -3,13 +3,26 @@ import Layout from "../../layouts/Layout.astro";
 ---
 
 <script>
-  import { timeline, type TimelineDefinition } from "motion";
-  import { loaderAnimation } from "../../lib/constants";
-
-  const sequence = [loaderAnimation];
-
-  timeline(sequence as TimelineDefinition);
+  window.addEventListener("load", () => {
+    const loader = document.querySelector(".loader") as HTMLElement;
+    if (loader) {
+      setTimeout(() => {
+        loader.classList.add("loader-hidden");
+      }, 100);
+    }
+  });
 </script>
+
+<style is:global>
+  .loader {
+    transition: opacity 0.5s ease-out;
+  }
+
+  .loader-hidden {
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+</style>
 
 <Layout title="Bastien Faivre - Now" description="What I'm currently doing">
   <main
