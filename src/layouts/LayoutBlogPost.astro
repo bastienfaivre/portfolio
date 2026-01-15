@@ -1,21 +1,21 @@
 ---
 import { formatDate } from "../lib/helpers";
-import type { MarkdownLayoutProps } from "astro";
 import BasicLayout from "./BasicLayout.astro";
 
-type Props = MarkdownLayoutProps<{
-  title: string;
-  description: string;
-  pubDate: string;
-  minutesRead: string;
-}>;
+interface Props {
+  frontmatter: {
+    title: string;
+    description: string;
+    pubDate: Date;
+    minutesRead?: string;
+  };
+}
 
 const { slug } = Astro.params;
 const { frontmatter } = Astro.props;
 ---
 
 <BasicLayout
-  frontmatter={frontmatter}
   slug={slug}
   page="blog"
   title={`Bastien Faivre - ${frontmatter.title}`}

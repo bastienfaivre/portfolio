@@ -1,5 +1,4 @@
 ---
-layout: ../../layouts/LayoutBlogPost.astro
 title: "A Starknet transactions batcher"
 description: ""
 pubDate: 2024-12-22

@@ -1,5 +1,4 @@
 ---
-layout: ../../layouts/LayoutBlogPost.astro
 title: "A guide on Starknet signatures"
 description: ""
 pubDate: 2024-07-20
