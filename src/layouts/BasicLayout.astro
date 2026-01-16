@@ -2,78 +2,35 @@
 interface Props {
   title: string;
   description: string;
-  page?: "travel" | "blog" | "now";
-  slug?: string | undefined;
-  frontmatter?: {
-    file: string;
-    url: string | undefined;
-  } & {
-    title: string;
-    description: string;
-    pubDate: string;
-    minutesRead: string;
-  };
 }
 
-const { title, description, page, slug, frontmatter } = Astro.props;
+const { title, description } = Astro.props;
 const image = `${Astro.url.origin}/me.webp"`;
 
-const schema =
-  page !== "blog"
-    ? {
-        "@context": "http://schema.org",
-        "@type": "Person",
-        name: "Bastien",
-        url: "https://bastienfaivre.com",
-        sameAs: [
-          "https://www.linkedin.com/in/bastienfaivre",
-          "https://github.com/BastienFaivre",
-        ],
-        image: "https://bastienfaivre.com/me.webp",
-        jobTitle: "Software Engineer",
-        worksFor: {
-          "@type": "Organization",
-          name: "Informal Systems",
-          address: {
-            "@type": "PostalAddress",
-            addressCountry: "Switzerland",
-          },
-        },
-        nationality: {
-          "@type": "Country",
-          name: "Switzerland",
-        },
-      }
-    : {
-        "@context": "http://schema.org",
-        "@type": "BlogPosting",
-        mainEntityOfPage: {
-          "@type": "WebPage",
-          "@id": `https://bastienfaivre.com/blog/${slug}`,
-        },
-        headline: frontmatter?.title || title,
-        description: frontmatter?.description || title,
-        image: "https://bastienfaivre.com/me.webp", //TODO: dynamic
-        author: {
-          "@type": "Person",
-          name: "Bastien",
-          url: "https://bastienfaivre.com",
-          sameAs: [
-            "https://www.linkedin.com/in/bastienfaivre",
-            "https://github.com/BastienFaivre",
-          ],
-        },
-        publisher: {
-          "@type": "Organization",
-          name: "Bastien",
-          logo: {
-            "@type": "ImageObject",
-            url: "https://bastienfaivre.com/me.webp",
-          },
-        },
-        datePublished: frontmatter?.pubDate || new Date().toISOString(),
-        dateModified: frontmatter?.pubDate || new Date().toISOString(),
-      };
+const schema = {
+  "@context": "http://schema.org",
+  "@type": "Person",
+  name: "Bastien",
+  url: "https://bastienfaivre.com",
+  sameAs: [
+    "https://www.linkedin.com/in/bastienfaivre",
+    "https://github.com/BastienFaivre",
+  ],
+  image: "https://bastienfaivre.com/me.webp",
+  jobTitle: "Software Engineer",
+  worksFor: {
+    "@type": "Organization",
+    name: "Informal Systems",
+    address: {
+      "@type": "PostalAddress",
+      addressCountry: "Switzerland",
+    },
+  },
+  nationality: {
+    "@type": "Country",
+    name: "Switzerland",
+  },
+};
 ---
 
 <!doctype html>

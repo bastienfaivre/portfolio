@@ -3,7 +3,6 @@ import sitemap from "@astrojs/sitemap";
 import robotsTxt from "astro-robots-txt";
 import UnoCSS from "@unocss/astro";
 import icon from "astro-icon";
-import { remarkReadingTime } from "./src/lib/ remark-reading-time.mjs";
 
 // https://astro.build/config
 export default defineConfig({
@@ -19,8 +18,5 @@ export default defineConfig({
     UnoCSS({ injectReset: true }),
     icon(),
   ],
-  markdown: {
-    remarkPlugins: [remarkReadingTime],
-  },
   output: "static",
 });
