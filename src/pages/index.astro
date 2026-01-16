@@ -16,6 +16,42 @@ import New from "../components/New.astro";
         loader.classList.add("loader-hidden");
       }, 100);
     }
+
+    const dvdLogo = document.getElementById("dvd-logo") as HTMLAnchorElement;
+    if (dvdLogo) {
+      let x = Math.random() * (window.innerWidth - 200);
+      let y = Math.random() * (window.innerHeight - 200);
+      let xSpeed = 1.5;
+      let ySpeed = 1.5;
+      const logoWidth = 200;
+      const logoHeight = 200;
+
+      function animate() {
+        x += xSpeed;
+        y += ySpeed;
+
+        if (x + logoWidth >= window.innerWidth || x <= 0) {
+          xSpeed = -xSpeed;
+          x = Math.max(0, Math.min(x, window.innerWidth - logoWidth));
+        }
+        if (y + logoHeight >= window.innerHeight || y <= 0) {
+          ySpeed = -ySpeed;
+          y = Math.max(0, Math.min(y, window.innerHeight - logoHeight));
+        }
+
+        dvdLogo.style.left = x + "px";
+        dvdLogo.style.top = y + "px";
+
+        requestAnimationFrame(animate);
+      }
+
+      window.addEventListener("resize", () => {
+        x = Math.max(0, Math.min(x, window.innerWidth - logoWidth));
+        y = Math.max(0, Math.min(y, window.innerHeight - logoHeight));
+      });
+
+      animate();
+    }
   });
 </script>
 
@@ -73,8 +109,21 @@ import New from "../components/New.astro";
   title="Bastien Faivre - Software Engineer"
   description="I'm a software engineer based in Switzerland, highly interested in distributed systems."
 >
+  <a
+    id="dvd-logo"
+    href="/pp-story"
+    class="fixed w-50 h-50 cursor-pointer"
+    style="z-index: 0;"
+  >
+    <img
+      src="/images/pp-crop.png"
+      alt="Profile Picture"
+      class="w-full h-full"
+    />
+  </a>
   <main
     class="text-white m-auto p-2 grid gap-2 max-w-6xl overflow-hidden relative w-full sm:p-4 sm:gap-2 md:grid-cols-2 md:gap-3 md:p-6 lg:h-screen lg:grid-rows-8 lg:grid-cols-4 lg:gap-4 lg:max-h-[800px]"
+    style="z-index: 1; pointer-events: none;"
   >
     <IntroCard />
     <Now />

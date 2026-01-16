@@ -1,0 +1,62 @@
+---
+import Layout from "../../layouts/Layout.astro";
+---
+
+<script>
+  window.addEventListener("load", () => {
+    const loader = document.querySelector(".loader") as HTMLElement;
+    if (loader) {
+      setTimeout(() => {
+        loader.classList.add("loader-hidden");
+      }, 100);
+    }
+  });
+</script>
+
+<style is:global>
+  .loader {
+    transition: opacity 0.5s ease-out;
+  }
+
+  .loader-hidden {
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+</style>
+
+<Layout
+  title="Bastien Faivre - Profile Picture Story"
+  description="The story behind my profile picture"
+>
+  <main
+    class="w-screen h-screen flex flex-col justify-start items-start max-w-3xl mx-auto p-8"
+  >
+    <a
+      href="/"
+      class="text-neutral-100 bg-neutral-900 hover:bg-neutral-800 hover:border-primary-500 px-4 py-2 mb-8 border-1 border-solid border-neutral-600 rounded-lg font-light inline-block transition-colors duration-200"
+      >Back</a
+    >
+    <h1 class="text-4xl font-bold mb-4 text-neutral-100">
+      My Profile Picture Story
+    </h1>
+    <p class="text-lg text-neutral-200 font-light">
+      Haaa, I see you have a special attention for the details for having found
+      this page! Well, here is the short story about my profile picture.<br
+      /><br />
+
+      I made this pixel art in high school when I was bored. Then, this picture
+      stayed forgotten on my hard drive for a few years. Then, when I created my
+      GitHub account in 2019, I was looking for a profile picture, and I
+      rediscovered this pixel art when digging through my files. I decided to
+      use it. Since then, this image has been my profile picture for most of my
+      accounts on the internet!<br /><br />
+
+      I love this picture. It makes me somehow... nostalgic.
+    </p>
+    <img
+      src="/images/pp-original.png"
+      alt="Original Profile Picture"
+      class="mt-8 rounded-lg shadow-lg max-w-md mx-auto"
+    />
+  </main>
+</Layout>
