@@ -14,7 +14,7 @@ const schema = {
   url: "https://bastienfaivre.com",
   sameAs: [
     "https://www.linkedin.com/in/bastienfaivre",
-    "https://github.com/BastienFaivre",
+    "https://github.com/bastienfaivre",
   ],
   image: "https://bastienfaivre.com/me.webp",
   jobTitle: "Software Engineer",
@@ -73,7 +73,6 @@ const schema = {
       content={image || "https://bastienfaivre.com/me.webp"}
     />
 
-    <link rel="preconnect" href="https://cdn.fontshare.com" />
     <script type="application/ld+json" set:html={JSON.stringify(schema)} />
   </head>
   <body
@@ -95,7 +94,9 @@ const schema = {
 
   body {
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif;
+    font-family:
+      -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica,
+      Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
   }
 
@@ -105,10 +106,14 @@ const schema = {
   h4,
   h5,
   h6 {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif;
+    font-family:
+      -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica,
+      Arial, sans-serif;
   }
   p {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif;
+    font-family:
+      -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica,
+      Arial, sans-serif;
   }
 
   b {

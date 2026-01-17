@@ -1,5 +1,5 @@
 // uno.config.ts
-import { defineConfig, presetUno, presetWebFonts } from "unocss";
+import { defineConfig, presetUno } from "unocss";
 
 export default defineConfig({
   content: {
@@ -9,15 +9,6 @@ export default defineConfig({
     boxShadow: {
       custom: `2px 2px 0`,
       "custom-hover": `1px 1px 0`,
-    },
-    fontFamily: {
-      sans: ["CabinetGrotesk", "Satoshi"],
-    },
-    gridTemplateRows: {
-      "auto-250": "repeat(auto-fill, 250px)",
-    },
-    gridTemplateColumns: {
-      "4-minmax": "repeat(4, minmax(150px, 1fr))",
     },
     colors: {
       gray: {
@@ -57,14 +48,5 @@ export default defineConfig({
       },
     },
   },
-  presets: [
-    presetUno(),
-    presetWebFonts({
-      provider: "fontshare",
-      fonts: {
-        sans: ["Cabinet Grotesk", "Satoshi"],
-        serif: "Zodiak",
-      },
-    }),
-  ],
+  presets: [presetUno()],
 });

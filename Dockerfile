@@ -2,22 +2,26 @@ FROM node:latest AS build
 
 WORKDIR /app
 
-RUN npm install -g npm@latest && npm install -g pnpm@latest
+RUN corepack enable && corepack prepare pnpm@latest --activate
 
 COPY package.json pnpm-lock.yaml ./
 
-RUN pnpm install
+RUN pnpm install --frozen-lockfile
 
 COPY . .
 
 RUN pnpm run build
 
-FROM node:latest
+FROM nginx:alpine
 
-WORKDIR /app
+COPY --from=build /app/dist /usr/share/nginx/html
 
-RUN npm install -g serve
+RUN echo 'server { listen 3000; root /usr/share/nginx/html; index index.html; location / { try_files $uri $uri/ /index.html; } }' > /etc/nginx/conf.d/default.conf
 
-COPY --from=build /app/dist ./dist
+RUN chown -R nginx:nginx /usr/share/nginx/html && chmod -R 755 /usr/share/nginx/html
 
-CMD ["serve", "dist", "-l", "3000"]
+USER nginx
+
+EXPOSE 3000
+
+CMD ["nginx", "-g", "daemon off;"]
