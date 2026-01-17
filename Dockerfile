@@ -2,7 +2,7 @@ FROM node:latest AS build
 
 WORKDIR /app
 
-RUN corepack enable && corepack prepare pnpm@latest --activate
+RUN npm install -g pnpm@latest
 
 COPY package.json pnpm-lock.yaml ./
 
