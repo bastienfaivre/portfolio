@@ -10,10 +10,10 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/sitemap": "^3.6.1",
+    "@astrojs/sitemap": "^3.7.0",
     "@iconify-json/academicons": "^1.2.4",
     "@iconify-json/ri": "^1.2.7",
-    "astro": "^5.16.9",
+    "astro": "^5.16.11",
     "astro-icon": "^1.1.5",
     "astro-robots-txt": "^1.0.0",
     "pnpm": "^10.28.0"
