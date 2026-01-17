@@ -5,7 +5,7 @@ interface Props {
 }
 
 const { title, description } = Astro.props;
-const image = `${Astro.url.origin}/me.webp"`;
+const image = "https://bastienfaivre.com/me.webp";
 
 const schema = {
   "@context": "http://schema.org",
@@ -59,7 +59,7 @@ const schema = {
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content={Astro.url.origin} />
+    <meta property="og:url" content={Astro.site} />
     <meta
       property="og:image"
       content={image || "https://bastienfaivre.com/me.webp"}
