@@ -6,6 +6,7 @@ import ContactsCard from "../components/ContactsCard.astro";
 import AboutMe from "../components/AboutMe.astro";
 import Now from "../components/Now.astro";
 import New from "../components/New.astro";
+import { Image } from "astro:assets";
 ---
 
 <script>
@@ -115,9 +116,12 @@ import New from "../components/New.astro";
     class="fixed w-50 h-50 cursor-pointer"
     style="z-index: 0;"
   >
-    <img
+    <Image
       src="/images/pp-crop.png"
-      alt="Profile Picture"
+      width={900}
+      height={920}
+      alt="Curious? Click me!"
+      loading="eager"
       class="w-full h-full"
     />
   </a>

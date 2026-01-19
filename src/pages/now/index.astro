@@ -1,5 +1,17 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import { createWebPageSchema, createBreadcrumbSchema } from "../../lib/seo";
+
+const webPageSchema = createWebPageSchema(
+  "What I'm currently doing",
+  "What I'm currently doing",
+  "https://bastienfaivre.com/now"
+);
+
+const breadcrumbSchema = createBreadcrumbSchema([
+  { name: "Home", url: "https://bastienfaivre.com" },
+  { name: "Now" }
+]);
 ---
 
 <script>
@@ -24,7 +36,7 @@ import Layout from "../../layouts/Layout.astro";
   }
 </style>
 
-<Layout title="Bastien Faivre - Now" description="What I'm currently doing">
+<Layout title="Bastien Faivre - Now" description="What I'm currently doing" schemas={[webPageSchema, breadcrumbSchema]}>
   <main
     class="w-screen h-screen flex flex-col justify-start items-start max-w-3xl mx-auto p-8"
   >

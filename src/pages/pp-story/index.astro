@@ -1,5 +1,18 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import { Image } from "astro:assets";
+import { createWebPageSchema, createBreadcrumbSchema } from "../../lib/seo";
+
+const webPageSchema = createWebPageSchema(
+  "My Profile Picture Story",
+  "The story behind my profile picture",
+  "https://bastienfaivre.com/pp-story",
+);
+
+const breadcrumbSchema = createBreadcrumbSchema([
+  { name: "Home", url: "https://bastienfaivre.com" },
+  { name: "Profile Picture Story" },
+]);
 ---
 
 <script>
@@ -27,6 +40,7 @@ import Layout from "../../layouts/Layout.astro";
 <Layout
   title="Bastien Faivre - Profile Picture Story"
   description="The story behind my profile picture"
+  schemas={[webPageSchema, breadcrumbSchema]}
 >
   <main
     class="w-screen h-screen flex flex-col justify-start items-start max-w-3xl mx-auto p-8"
@@ -53,9 +67,12 @@ import Layout from "../../layouts/Layout.astro";
 
       I love this picture. It makes me somehow... nostalgic.
     </p>
-    <img
+    <Image
       src="/images/pp-original.png"
-      alt="Original Profile Picture"
+      alt="Original PP"
+      width={1280}
+      height={1280}
+      loading="eager"
       class="mt-8 rounded-lg shadow-lg w-full"
       style="max-width: min(90vw, 28rem); margin-left: auto; margin-right: auto; padding-bottom: 5vw;"
     />
