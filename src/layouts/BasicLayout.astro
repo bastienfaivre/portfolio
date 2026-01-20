@@ -45,19 +45,6 @@ const allSchemas = [personSchema, ...schemas];
     <link rel="preconnect" href="https://www.googletagmanager.com" />
     <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
     <link rel="canonical" href={canonicalURL} />
-
-    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-4BF2KVELL3"
-    ></script>
-    <script is:inline>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){window.dataLayer.push(arguments);}
-      gtag("js", new Date());
-      gtag("config", "G-4BF2KVELL3", {
-        page_path: window.location.pathname,
-        page_title: document.title,
-        page_location: window.location.href
-      });
-    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
@@ -88,6 +75,26 @@ const allSchemas = [personSchema, ...schemas];
   >
     <slot name="loader" />
     <slot />
+
+    <script is:inline>
+      window.addEventListener("load", function() {
+        var script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-4BF2KVELL3";
+        document.head.appendChild(script);
+
+        script.onload = function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){window.dataLayer.push(arguments);}
+          gtag("js", new Date());
+          gtag("config", "G-4BF2KVELL3", {
+            page_path: window.location.pathname,
+            page_title: document.title,
+            page_location: window.location.href
+          });
+        };
+      });
+    </script>
   </body>
 </html>
 
