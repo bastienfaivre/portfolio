@@ -5,12 +5,12 @@ import { createWebPageSchema, createBreadcrumbSchema } from "../../lib/seo";
 const webPageSchema = createWebPageSchema(
   "What I'm currently doing",
   "What I'm currently doing",
-  "https://bastienfaivre.com/now"
+  "https://bastienfaivre.com/now",
 );
 
 const breadcrumbSchema = createBreadcrumbSchema([
   { name: "Home", url: "https://bastienfaivre.com" },
-  { name: "Now" }
+  { name: "Now" },
 ]);
 ---
 
@@ -36,7 +36,11 @@ const breadcrumbSchema = createBreadcrumbSchema([
   }
 </style>
 
-<Layout title="Bastien Faivre - Now" description="What I'm currently doing" schemas={[webPageSchema, breadcrumbSchema]}>
+<Layout
+  title="Bastien Faivre - Now"
+  description="What I'm currently doing"
+  schemas={[webPageSchema, breadcrumbSchema]}
+>
   <main
     class="w-screen h-screen flex flex-col justify-start items-start max-w-3xl mx-auto p-8"
   >
@@ -45,12 +49,48 @@ const breadcrumbSchema = createBreadcrumbSchema([
       class="text-neutral-100 bg-neutral-900 hover:bg-neutral-800 hover:border-primary-500 px-4 py-2 mb-8 border-1 border-solid border-neutral-600 rounded-lg font-light inline-block transition-colors duration-200"
       >Back</a
     >
-    <h1 class="text-4xl font-bold mb-4 text-neutral-100">
+    <h1 class="text-4xl font-bold mb-8 text-neutral-100">
       What I'm currently doing
     </h1>
-    <p class="text-lg text-neutral-200 font-light">
-      I am glad you want to know more about me, come back later, I'm still
-      working on this page.
-    </p>
+
+    <section class="mb-8">
+      <h2 class="text-2xl font-semibold mb-3 text-neutral-100">Professional</h2>
+      <p class="text-lg text-neutral-200 font-light">
+        I'm starting a new position in March.
+      </p>
+    </section>
+
+    <section class="mb-8">
+      <h2 class="text-2xl font-semibold mb-3 text-neutral-100">Side hustle</h2>
+      <p class="text-lg text-neutral-200 font-light">
+        I'm helping people clean up their digital life, making it easier to
+        manage their data and maintain a secure online presence.
+      </p>
+    </section>
+
+    <section class="mb-8">
+      <h2 class="text-2xl font-semibold mb-3 text-neutral-100">Clashware</h2>
+      <p class="text-lg text-neutral-200 font-light">
+        I'm the backend, DevOps, and infrastructure engineer on <a
+          href="https://clashware.com/#products"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-primary-500 hover:underline">Clashware's projects</a
+        >. I'm also working on improving the company's branding and exploring
+        new business opportunities.
+      </p>
+    </section>
+
+    <section class="mb-8">
+      <h2 class="text-2xl font-semibold mb-3 text-neutral-100">Sport</h2>
+      <p class="text-lg text-neutral-200 font-light">
+        I'm primarily focused on trail running, with my main goal being <a
+          href="https://www.montreux-trail.ch/en/mxsky"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-primary-500 hover:underline">MXSKY</a
+        > this year. I also swim as a hobby and do street workout.
+      </p>
+    </section>
   </main>
 </Layout>
