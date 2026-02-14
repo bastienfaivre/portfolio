@@ -1,17 +1,36 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import { createWebPageSchema, createBreadcrumbSchema } from "../../lib/seo";
+import projectsData from "../../data/projects.json";
 
 const webPageSchema = createWebPageSchema(
   "My Projects",
   "My projects",
-  "https://bastienfaivre.com/projects"
+  "https://bastienfaivre.com/projects",
 );
 
 const breadcrumbSchema = createBreadcrumbSchema([
   { name: "Home", url: "https://bastienfaivre.com" },
-  { name: "Projects" }
+  { name: "Projects" },
 ]);
+
+interface Project {
+  title: string;
+  company: string;
+  status: "active" | "maintenance" | "archived";
+  period: string;
+  description: string;
+  technologies: string[];
+  website?: string;
+  code?: string;
+  paper?: string;
+}
+
+const projects = projectsData as Project[];
+
+const activeProjects = projects.filter((p) => p.status === "active");
+const maintenanceProjects = projects.filter((p) => p.status === "maintenance");
+const archivedProjects = projects.filter((p) => p.status === "archived");
 ---
 
 <script>
@@ -22,12 +41,59 @@ const breadcrumbSchema = createBreadcrumbSchema([
         loader.classList.add("loader-hidden");
       }, 100);
     }
+
+    const moreInfoButtons = document.querySelectorAll(".more-info-btn");
+    moreInfoButtons.forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const item = btn.closest(".project-item");
+        const description = item?.querySelector(
+          ".project-description",
+        ) as HTMLElement;
+        const bar = item?.querySelector(".project-bar");
+
+        if (description && bar) {
+          const isOpen = description.classList.contains("open");
+
+          // Close all other descriptions and reset their buttons
+          document
+            .querySelectorAll(".project-description.open")
+            .forEach((desc) => {
+              if (desc !== description) {
+                const descElement = desc as HTMLElement;
+                const descItem = descElement.closest(".project-item");
+                const descBar = descItem?.querySelector(".project-bar");
+                const descBtn = descItem?.querySelector(".more-info-btn");
+                descElement.style.maxHeight = "0";
+                desc.classList.remove("open");
+                descBar?.classList.remove("has-open-description");
+                if (descBtn) descBtn.textContent = "more ↓";
+              }
+            });
+
+          if (isOpen) {
+            description.style.maxHeight = "0";
+            description.classList.remove("open");
+            bar.classList.remove("has-open-description");
+            btn.textContent = "more ↓";
+          } else {
+            const content = description.querySelector(
+              ".project-description-content",
+            ) as HTMLElement;
+            description.style.maxHeight = content.scrollHeight + "px";
+            description.classList.add("open");
+            bar.classList.add("has-open-description");
+            btn.textContent = "less ↑";
+          }
+        }
+      });
+    });
   });
 </script>
 
 <style is:global>
   .loader {
-    transition: opacity 0.5s ease-out;
+    transition: opacity 0.5s linear;
   }
 
   .loader-hidden {
@@ -36,19 +102,521 @@ const breadcrumbSchema = createBreadcrumbSchema([
   }
 </style>
 
-<Layout title="Bastien Faivre - Projects" description="My projects" schemas={[webPageSchema, breadcrumbSchema]}>
+<style>
+  .projects-container {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    padding-bottom: 2rem;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #f5f5f5;
+  }
+
+  .info-icon {
+    cursor: help;
+    color: #737373;
+    font-size: 1rem;
+    position: relative;
+  }
+
+  .info-tooltip {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: 0.5rem;
+    background: #171717;
+    border: 1px solid #404040;
+    border-radius: 0.5rem;
+    padding: 0.75rem;
+    width: 250px;
+    font-size: 0.75rem;
+    color: #a3a3a3;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s linear;
+    z-index: 100;
+  }
+
+  .info-icon:hover .info-tooltip {
+    opacity: 1;
+  }
+
+  .projects-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .project-item {
+    position: relative;
+  }
+
+  .project-bar {
+    position: relative;
+    background: #171717;
+    border: 1px solid #525252;
+    border-radius: 0.5rem;
+    padding: 0.75rem 1rem;
+    transition:
+      background-color 0.2s linear,
+      border-color 0.2s linear;
+    width: 100%;
+  }
+
+  .more-info-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+  }
+
+  .project-bar.has-open-description {
+    border-radius: 0.5rem 0.5rem 0 0;
+  }
+
+  .project-link {
+    display: inline-flex;
+    align-items: center;
+    color: #a3a3a3;
+    transition: color 0.2s linear;
+  }
+
+  .project-link:hover {
+    color: #8c2da5;
+  }
+
+  .project-description {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s linear;
+    background: #0a0a0a;
+    border: none;
+    border-radius: 0 0 0.5rem 0.5rem;
+    margin-top: 0;
+  }
+
+  .project-description.open {
+    border: 1px solid #404040;
+    border-top: none;
+  }
+
+  .project-description-content {
+    padding: 1rem;
+  }
+
+  .tech-tag {
+    display: inline-block;
+    background: #262626;
+    color: #a3a3a3;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.75rem;
+    margin-right: 0.25rem;
+    margin-top: 0.25rem;
+  }
+</style>
+
+<Layout
+  title="Bastien Faivre - Projects"
+  description="My projects"
+  schemas={[webPageSchema, breadcrumbSchema]}
+>
   <main
     class="w-screen h-screen flex flex-col justify-start items-start max-w-3xl mx-auto p-8"
   >
     <a
       href="/"
       class="text-neutral-100 bg-neutral-900 hover:bg-neutral-800 hover:border-primary-500 px-4 py-2 mb-8 border-1 border-solid border-neutral-600 rounded-lg font-light inline-block transition-colors duration-200"
-      >Back</a
     >
-    <h1 class="text-4xl font-bold mb-4 text-neutral-100">My Projects</h1>
-    <p class="text-lg text-neutral-200 font-light">
-      I am glad you want to know more about my projects, come back later, I'm
-      still working on this page.
+      Back
+    </a>
+
+    <h1 class="text-4xl font-bold mb-2 text-neutral-100">My Projects</h1>
+    <p class="text-lg text-neutral-200 font-light mb-12">
+      Projects I've worked on throughout my career
     </p>
+
+    <div class="projects-container w-full">
+      <section>
+        <div class="section-header">
+          <h2 class="section-title">Active Projects</h2>
+        </div>
+        {activeProjects.length > 0 ? (
+          <div class="projects-list">
+            {activeProjects.map((project) => (
+                <div class="project-item">
+                  <div class="project-bar">
+                    <div class="font-semibold text-neutral-100 text-base flex items-center gap-2">
+                      <span>{project.title}</span>
+                      <div class="flex items-center gap-2">
+                        {project.website && (
+                          <a
+                            href={project.website}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="project-link"
+                            onclick="event.stopPropagation()"
+                            title="Website"
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="16"
+                              height="16"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-width="2"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                            >
+                              <circle cx="12" cy="12" r="10" />
+                              <line x1="2" y1="12" x2="22" y2="12" />
+                              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                            </svg>
+                          </a>
+                        )}
+                        {project.code && (
+                          <a
+                            href={project.code}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="project-link"
+                            onclick="event.stopPropagation()"
+                            title="Source Code"
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="16"
+                              height="16"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-width="2"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                            >
+                              <polyline points="16 18 22 12 16 6" />
+                              <polyline points="8 6 2 12 8 18" />
+                            </svg>
+                          </a>
+                        )}
+                        {project.paper && (
+                          <a
+                            href={project.paper}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="project-link"
+                            onclick="event.stopPropagation()"
+                            title="Paper"
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="16"
+                              height="16"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-width="2"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                            >
+                              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                              <polyline points="14 2 14 8 20 8" />
+                              <line x1="16" y1="13" x2="8" y2="13" />
+                              <line x1="16" y1="17" x2="8" y2="17" />
+                              <polyline points="10 9 9 9 8 9" />
+                            </svg>
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                    <div class="text-sm text-neutral-400 font-light mt-1 flex items-center justify-between">
+                      <span>{project.company} • {project.period}</span>
+                      <button class="more-info-btn text-primary-500 hover:text-primary-400 transition-colors duration-200 text-xs">
+                        more ↓
+                      </button>
+                    </div>
+                  </div>
+                  <div class="project-description">
+                    <div class="project-description-content">
+                      <p class="text-sm text-neutral-200 font-light mb-3">
+                        {project.description}
+                      </p>
+                      <div class="flex flex-wrap gap-1">
+                        {project.technologies.map((tech) => (
+                          <span class="tech-tag">{tech}</span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+          </div>
+        ) : (
+          <p class="text-neutral-400 font-light">
+            I am currently not working on any active project.
+          </p>
+        )}
+      </section>
+
+      {
+        maintenanceProjects.length > 0 && (
+          <section>
+            <div class="section-header">
+              <h2 class="section-title">In Maintenance</h2>
+              <div class="info-icon">
+                ⓘ
+                <div class="info-tooltip">
+                  These are projects I maintain with updates, bug fixes, and
+                  security patches, but no active feature development.
+                </div>
+              </div>
+            </div>
+            <div class="projects-list">
+              {maintenanceProjects.map((project) => (
+                <div class="project-item">
+                  <div class="project-bar">
+                    <div class="font-semibold text-neutral-100 text-base flex items-center gap-2">
+                      <span>{project.title}</span>
+                      <div class="flex items-center gap-2">
+                        {project.website && (
+                          <a
+                            href={project.website}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="project-link"
+                            onclick="event.stopPropagation()"
+                            title="Website"
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="16"
+                              height="16"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-width="2"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                            >
+                              <circle cx="12" cy="12" r="10" />
+                              <line x1="2" y1="12" x2="22" y2="12" />
+                              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                            </svg>
+                          </a>
+                        )}
+                        {project.code && (
+                          <a
+                            href={project.code}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="project-link"
+                            onclick="event.stopPropagation()"
+                            title="Source Code"
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="16"
+                              height="16"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-width="2"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                            >
+                              <polyline points="16 18 22 12 16 6" />
+                              <polyline points="8 6 2 12 8 18" />
+                            </svg>
+                          </a>
+                        )}
+                        {project.paper && (
+                          <a
+                            href={project.paper}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="project-link"
+                            onclick="event.stopPropagation()"
+                            title="Paper"
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="16"
+                              height="16"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-width="2"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                            >
+                              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                              <polyline points="14 2 14 8 20 8" />
+                              <line x1="16" y1="13" x2="8" y2="13" />
+                              <line x1="16" y1="17" x2="8" y2="17" />
+                              <polyline points="10 9 9 9 8 9" />
+                            </svg>
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                    <div class="text-sm text-neutral-400 font-light mt-1 flex items-center justify-between">
+                      <span>{project.company} • {project.period}</span>
+                      <button class="more-info-btn text-primary-500 hover:text-primary-400 transition-colors duration-200 text-xs">
+                        more ↓
+                      </button>
+                    </div>
+                  </div>
+                  <div class="project-description">
+                    <div class="project-description-content">
+                      <p class="text-sm text-neutral-200 font-light mb-3">
+                        {project.description}
+                      </p>
+                      <div class="flex flex-wrap gap-1">
+                        {project.technologies.map((tech) => (
+                          <span class="tech-tag">{tech}</span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        )
+      }
+
+      {
+        archivedProjects.length > 0 && (
+          <section>
+            <div class="section-header">
+              <h2 class="section-title">Past Projects</h2>
+            </div>
+            <div class="projects-list">
+              {archivedProjects.map((project) => (
+                <div class="project-item">
+                  <div class="project-bar">
+                    <div class="font-semibold text-neutral-100 text-base flex items-center gap-2">
+                      <span>{project.title}</span>
+                      <div class="flex items-center gap-2">
+                        {project.website && (
+                          <a
+                            href={project.website}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="project-link"
+                            onclick="event.stopPropagation()"
+                            title="Website"
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="16"
+                              height="16"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-width="2"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                            >
+                              <circle cx="12" cy="12" r="10" />
+                              <line x1="2" y1="12" x2="22" y2="12" />
+                              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                            </svg>
+                          </a>
+                        )}
+                        {project.code && (
+                          <a
+                            href={project.code}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="project-link"
+                            onclick="event.stopPropagation()"
+                            title="Source Code"
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="16"
+                              height="16"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-width="2"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                            >
+                              <polyline points="16 18 22 12 16 6" />
+                              <polyline points="8 6 2 12 8 18" />
+                            </svg>
+                          </a>
+                        )}
+                        {project.paper && (
+                          <a
+                            href={project.paper}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="project-link"
+                            onclick="event.stopPropagation()"
+                            title="Paper"
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="16"
+                              height="16"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-width="2"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                            >
+                              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                              <polyline points="14 2 14 8 20 8" />
+                              <line x1="16" y1="13" x2="8" y2="13" />
+                              <line x1="16" y1="17" x2="8" y2="17" />
+                              <polyline points="10 9 9 9 8 9" />
+                            </svg>
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                    <div class="text-sm text-neutral-400 font-light mt-1 flex items-center justify-between">
+                      <span>{project.company} • {project.period}</span>
+                      <button class="more-info-btn text-primary-500 hover:text-primary-400 transition-colors duration-200 text-xs">
+                        more ↓
+                      </button>
+                    </div>
+                  </div>
+                  <div class="project-description">
+                    <div class="project-description-content">
+                      <p class="text-sm text-neutral-200 font-light mb-3">
+                        {project.description}
+                      </p>
+                      <div class="flex flex-wrap gap-1">
+                        {project.technologies.map((tech) => (
+                          <span class="tech-tag">{tech}</span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        )
+      }
+    </div>
   </main>
 </Layout>

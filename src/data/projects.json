@@ -1,0 +1,175 @@
+[
+  {
+    "title": "Dropmail - An embaddable email collection form",
+    "website": "https://dropmail.bastienfaivre.com/?source=portfolio",
+    "code": "https://github.com/bastienfaivre/dropmail",
+    "company": "Personal Project",
+    "status": "maintenance",
+    "period": "Feb 2026 - Present",
+    "description": "A minimal, embeddable email collection form built for collecting newsletter signups across multiple properties (portfolio sites, Notion pages, etc.) with bot protection and source tracking.",
+    "technologies": [
+      "Go",
+      "Typescript",
+      "CSS",
+      "SQlite",
+      "Docker"
+    ]
+  },
+  {
+    "title": "libp2p-broadcast protocol implementation",
+    "code": "https://github.com/bastienfaivre/libp2p-broadcast",
+    "company": "Informal Systems",
+    "status": "maintenance",
+    "period": "Jul 2025 - Present",
+    "description": "The protocol is designed to fix the inefficiencies of libp2p-scatter, which creates a new substream and handshake for every message. Instead, it uses two long-lived substreams per peer—one inbound and one outbound—reducing RTT overhead and improving throughput. It keeps the same interface as libp2p-scatter, making it a drop-in replacement.",
+    "technologies": [
+      "Rust"
+    ]
+  },
+  {
+    "title": "DOG Gossip protocol implementation in Rust libp2p",
+    "code": "https://github.com/bastienfaivre/libp2p-dog",
+    "paper": "https://bastienfaivre.com/files/master-thesis.pdf",
+    "company": "Informal Systems",
+    "status": "maintenance",
+    "period": "Dec 2024 - Present",
+    "description": "I implemented the DOG protocol as a Rust libp2p module, and benchmarked it against the existing Gossipsub implementation.",
+    "technologies": [
+      "Rust",
+      "Python",
+      "Bash",
+      "Docker"
+    ]
+  },
+  {
+    "title": "P2P Modular Pyramidal Overlay (MPO) Protocol",
+    "code": "https://github.com/circlefin/malachite",
+    "paper": "https://bastienfaivre.com/files/master-thesis.pdf",
+    "company": "Informal Systems",
+    "status": "maintenance",
+    "period": "Sep 2024 - Present",
+    "description": "I designed and implemented a scalable, Modular Pyramidal Overlay (MPO) protocol leveraging state-of-the-art protocols to construct balanced, resilient, and low-diameter overlays. This work is part of Malachite, a flexible BFT consensus engine in Rust.",
+    "technologies": [
+      "Rust",
+      "Bash",
+      "Docker"
+    ]
+  },
+  {
+    "title": "A Starknet Transactions Batcher",
+    "code": "https://github.com/metacube-games/starknet-batcher",
+    "paper": "https://dev.to/bastienfaivre/a-starknet-transactions-batcher-1hpk",
+    "company": "Metacube Games",
+    "status": "maintenance",
+    "period": "Dec 2024 - Present",
+    "description": "The article describes the Metacube transaction batcher used to instantly send earned NFTs to players. It explains its scalable actor-based architecture and includes a detailed Go implementation.",
+    "technologies": [
+      "Go"
+    ]
+  },
+  {
+    "title": "A Guide on Starknet Signatures",
+    "website": "https://signatures.felts.xyz/",
+    "code": "https://github.com/metacube-games/starknet-signatures",
+    "paper": "https://dev.to/bastienfaivre/a-guide-on-starknet-signatures-a3m",
+    "company": "Metacube Games",
+    "status": "maintenance",
+    "period": "Jul 2024 - Present",
+    "description": "The article explains how signing and signature verification work on Starknet under Account Abstraction. It includes TypeScript and Go examples for signing messages and verifying signatures using either a public key or an account address.",
+    "technologies": [
+      "Typescript",
+      "Go"
+    ]
+  },
+  {
+    "title": "Starknet ID Go Library",
+    "code": "https://github.com/metacube-games/starknetid.go",
+    "company": "Metacube Games",
+    "status": "maintenance",
+    "period": "Jun 2024 - Present",
+    "description": "A Go library to interact with the Starknet.id protocol.",
+    "technologies": [
+      "Go"
+    ]
+  },
+  {
+    "title": "Metacube - A massive multiplayer game on Starknet",
+    "website": "https://play.metacube.games/",
+    "code": "https://github.com/orgs/metacube-games",
+    "company": "Metacube Games",
+    "status": "maintenance",
+    "period": "Oct 2022 - Present",
+    "description": "I designed and built the complete backend (DevOps, Infrastructure, API, etc.) of the game. This project is responsible for most of my actual skills and experience in software engineering!",
+    "technologies": [
+      "C++",
+      "Go",
+      "Javascript",
+      "Bash",
+      "Docker"
+    ]
+  },
+  {
+    "title": "Blockchain RPC Censorship Proxy",
+    "code": "https://github.com/bastienfaivre/censorship-proxy",
+    "paper": "https://bastienfaivre.com/files/ethereum-report.pdf",
+    "company": "DCL, EPFL",
+    "status": "archived",
+    "period": "Sep 2023 - Feb 2024",
+    "description": "a proxy for JSON-RPC API that censors transactions issued by blacklisted addresses.",
+    "technologies": [
+      "Go"
+    ]
+  },
+  {
+    "title": "Minion-L2",
+    "code": "https://github.com/bastienfaivre/minion-L2",
+    "paper": "https://bastienfaivre.com/files/ethereum-report.pdf",
+    "company": "DCL, EPFL",
+    "status": "archived",
+    "period": "Jun 2023 - Feb 2024",
+    "description": "A tool to deploy a Layer 2 system over an Ethereum Proof of Stake network.",
+    "technologies": [
+      "Bash",
+      "Javascript",
+      "Python",
+      "Go"
+    ]
+  },
+  {
+    "title": "Blockchain RPC Byzantine Shield",
+    "code": "https://github.com/bastienfaivre/byzantine-shield",
+    "paper": "https://bastienfaivre.com/files/twins-report.pdf",
+    "company": "DCL, EPFL",
+    "status": "archived",
+    "period": "Apr 2023 - Jun 2023",
+    "description": "A middleware proxy for blockchain clients designed to mitigate the risks associated with communicating with byzantine nodes. It forwards JSON RPC requests from clients, like Geth, to a pre-configured list of blockchain nodes, and aggregates their responses to detect inconsistencies and return a single, consistent answer.",
+    "technologies": [
+      "Go"
+    ]
+  },
+  {
+    "title": "Blockchain Security Evaluation with Twins",
+    "code": "https://github.com/bastienfaivre/twins-attack",
+    "paper": "https://bastienfaivre.com/files/twins-report.pdf",
+    "company": "DCL, EPFL",
+    "status": "archived",
+    "period": "Feb 2023 - Jun 2023",
+    "description": "An adversarial simulation that exposes potential vulnerabilities in the client-node communication of prominent blockchains",
+    "technologies": [
+      "Bash",
+      "Go",
+      "Python"
+    ]
+  },
+  {
+    "title": "Linux portable package management",
+    "code": "https://github.com/bastienfaivre/bash-scripts",
+    "company": "Personal Project",
+    "status": "archived",
+    "period": "May 2022 - May 2023",
+    "description": "A collection of useful bash scripts I was using on my Linux machines.",
+    "technologies": [
+      "Bash"
+    ]
+  }
+]
