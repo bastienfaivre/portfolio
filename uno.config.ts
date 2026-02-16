@@ -6,6 +6,13 @@ export default defineConfig({
     filesystem: ["**/*.{html,js,ts,jsx,tsx,vue,svelte,astro}"],
   },
   theme: {
+    breakpoints: {
+      sm: "704px",
+      md: "940px",
+      lg: "1126px",
+      xl: "1408px",
+      "2xl": "1584px",
+    },
     boxShadow: {
       custom: `2px 2px 0`,
       "custom-hover": `1px 1px 0`,

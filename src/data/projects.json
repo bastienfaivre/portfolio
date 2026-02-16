@@ -5,7 +5,6 @@
     "code": "https://github.com/bastienfaivre/dropmail",
     "company": "Personal Project",
     "status": "maintenance",
-    "highlight": true,
     "period": "Feb 2026 - Present",
     "description": "A minimal, embeddable email collection form built for collecting newsletter signups across multiple properties (portfolio sites, Notion pages, etc.) with bot protection and source tracking.",
     "technologies": [
@@ -21,6 +20,7 @@
     "code": "https://github.com/bastienfaivre/libp2p-broadcast",
     "company": "Informal Systems",
     "status": "maintenance",
+    "highlight": true,
     "period": "Jul 2025 - Present",
     "description": "The protocol is designed to fix the inefficiencies of libp2p-scatter, which creates a new substream and handshake for every message. Instead, it uses two long-lived substreams per peer—one inbound and one outbound—reducing RTT overhead and improving throughput. It keeps the same interface as libp2p-scatter, making it a drop-in replacement.",
     "technologies": [
@@ -33,7 +33,6 @@
     "paper": "https://bastienfaivre.com/files/master-thesis.pdf",
     "company": "Informal Systems",
     "status": "maintenance",
-    "highlight": true,
     "period": "Dec 2024 - Present",
     "description": "I implemented the DOG protocol as a Rust libp2p module, and benchmarked it against the existing Gossipsub implementation.",
     "technologies": [
@@ -49,6 +48,7 @@
     "paper": "https://bastienfaivre.com/files/master-thesis.pdf",
     "company": "Informal Systems",
     "status": "maintenance",
+    "highlight": true,
     "period": "Sep 2024 - Present",
     "description": "I designed and implemented a scalable, Modular Pyramidal Overlay (MPO) protocol leveraging state-of-the-art protocols to construct balanced, resilient, and low-diameter overlays. This work is part of Malachite, a flexible BFT consensus engine in Rust.",
     "technologies": [
