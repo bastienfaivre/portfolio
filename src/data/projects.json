@@ -1,10 +1,11 @@
 [
   {
-    "title": "Dropmail - An embaddable email collection form",
+    "title": "Dropmail - An embeddable email collection form",
     "website": "https://dropmail.bastienfaivre.com/?source=portfolio",
     "code": "https://github.com/bastienfaivre/dropmail",
     "company": "Personal Project",
     "status": "maintenance",
+    "highlight": true,
     "period": "Feb 2026 - Present",
     "description": "A minimal, embeddable email collection form built for collecting newsletter signups across multiple properties (portfolio sites, Notion pages, etc.) with bot protection and source tracking.",
     "technologies": [
@@ -32,6 +33,7 @@
     "paper": "https://bastienfaivre.com/files/master-thesis.pdf",
     "company": "Informal Systems",
     "status": "maintenance",
+    "highlight": true,
     "period": "Dec 2024 - Present",
     "description": "I implemented the DOG protocol as a Rust libp2p module, and benchmarked it against the existing Gossipsub implementation.",
     "technologies": [
@@ -98,6 +100,7 @@
     "code": "https://github.com/orgs/metacube-games",
     "company": "Metacube Games",
     "status": "maintenance",
+    "highlight": true,
     "period": "Oct 2022 - Present",
     "description": "I designed and built the complete backend (DevOps, Infrastructure, API, etc.) of the game. This project is responsible for most of my actual skills and experience in software engineering!",
     "technologies": [

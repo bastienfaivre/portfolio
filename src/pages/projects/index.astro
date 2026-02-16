@@ -24,6 +24,7 @@ interface Project {
   website?: string;
   code?: string;
   paper?: string;
+  highlight?: boolean;
 }
 
 const projects = projectsData as Project[];
@@ -31,7 +32,31 @@ const projects = projectsData as Project[];
 const activeProjects = projects.filter((p) => p.status === "active");
 const maintenanceProjects = projects.filter((p) => p.status === "maintenance");
 const archivedProjects = projects.filter((p) => p.status === "archived");
+
 ---
+
+<style is:global>
+  .info-icon:hover .info-tooltip,
+  .info-icon.active .info-tooltip {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .project-bar.has-open-description {
+    border-radius: 0.5rem 0.5rem 0 0;
+  }
+
+  .project-description {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s linear;
+  }
+
+  .project-description.open {
+    border: 1px solid #404040;
+    border-top: none;
+  }
+</style>
 
 <script>
   window.addEventListener("load", () => {
@@ -102,145 +127,6 @@ const archivedProjects = projects.filter((p) => p.status === "archived");
   });
 </script>
 
-<style is:global>
-  .loader {
-    transition: opacity 0.5s linear;
-  }
-
-  .loader-hidden {
-    opacity: 0 !important;
-    pointer-events: none !important;
-  }
-</style>
-
-<style>
-  .projects-container {
-    display: flex;
-    flex-direction: column;
-    gap: 3rem;
-    padding-bottom: 2rem;
-  }
-
-  .section-header {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin-bottom: 1rem;
-  }
-
-  .section-title {
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: #f5f5f5;
-  }
-
-  .info-icon {
-    cursor: help;
-    color: #737373;
-    font-size: 1rem;
-    position: relative;
-  }
-
-  .info-tooltip {
-    position: absolute;
-    bottom: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    margin-bottom: 0.5rem;
-    background: #171717;
-    border: 1px solid #404040;
-    border-radius: 0.5rem;
-    padding: 0.75rem;
-    width: 250px;
-    font-size: 0.75rem;
-    color: #a3a3a3;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.2s linear;
-    z-index: 100;
-  }
-
-  .info-icon:hover .info-tooltip,
-  .info-icon.active .info-tooltip {
-    opacity: 1;
-    pointer-events: auto;
-  }
-
-  .projects-list {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .project-item {
-    position: relative;
-  }
-
-  .project-bar {
-    position: relative;
-    background: #171717;
-    border: 1px solid #525252;
-    border-radius: 0.5rem;
-    padding: 0.75rem 1rem;
-    transition:
-      background-color 0.2s linear,
-      border-color 0.2s linear;
-    width: 100%;
-  }
-
-  .more-info-btn {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-weight: 500;
-  }
-
-  .project-bar.has-open-description {
-    border-radius: 0.5rem 0.5rem 0 0;
-  }
-
-  .project-link {
-    display: inline-flex;
-    align-items: center;
-    color: #a3a3a3;
-    transition: color 0.2s linear;
-  }
-
-  .project-link:hover {
-    color: #8c2da5;
-  }
-
-  .project-description {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s linear;
-    background: #0a0a0a;
-    border: none;
-    border-radius: 0 0 0.5rem 0.5rem;
-    margin-top: 0;
-  }
-
-  .project-description.open {
-    border: 1px solid #404040;
-    border-top: none;
-  }
-
-  .project-description-content {
-    padding: 1rem;
-  }
-
-  .tech-tag {
-    display: inline-block;
-    background: #262626;
-    color: #a3a3a3;
-    padding: 0.25rem 0.5rem;
-    border-radius: 0.25rem;
-    font-size: 0.75rem;
-    margin-right: 0.25rem;
-    margin-top: 0.25rem;
-  }
-</style>
-
 <Layout
   title="Bastien Faivre - Projects"
   description="My projects"
@@ -251,27 +137,28 @@ const archivedProjects = projects.filter((p) => p.status === "archived");
   >
     <a
       href="/"
-      class="text-neutral-100 bg-neutral-900 hover:bg-neutral-800 hover:border-primary-500 px-4 py-2 mb-8 border-1 border-solid border-neutral-600 rounded-lg font-light inline-block transition-colors duration-200"
+      class="text-gray-100 bg-gray-900 hover:bg-gray-800 hover:border-primary-500 px-4 py-2 mb-8 border-1 border-solid border-gray-600 rounded-lg font-light inline-block transition-colors duration-200"
     >
       Back
     </a>
 
-    <h1 class="text-4xl font-bold mb-2 text-neutral-100">My Projects</h1>
-    <p class="text-lg text-neutral-200 font-light mb-12">
+    <h1 class="text-4xl font-bold mb-2 text-gray-100">My Projects</h1>
+    <p class="text-lg text-gray-200 font-light mb-12">
       Projects I've worked on throughout my career
     </p>
 
-    <div class="projects-container w-full">
+    <div class="flex flex-col gap-12 pb-8 w-full">
       <section>
-        <div class="section-header">
-          <h2 class="section-title">Active Projects</h2>
+        <div class="flex items-center gap-2 mb-4">
+          <h2 class="text-2xl font-semibold text-gray-100">Active Projects</h2>
         </div>
-        {activeProjects.length > 0 ? (
-          <div class="projects-list">
-            {activeProjects.map((project) => (
-                <div class="project-item">
-                  <div class="project-bar">
-                    <div class="font-semibold text-neutral-100 text-base flex items-center gap-2">
+        {
+          activeProjects.length > 0 ? (
+            <div class="flex flex-col gap-4">
+              {activeProjects.map((project) => (
+                <div class="project-item relative">
+                  <div class="project-bar relative bg-gray-900 border border-gray-600 rounded-lg py-3 px-4 transition-colors duration-200 w-full">
+                    <div class="font-semibold text-gray-100 text-base flex items-center gap-2">
                       <span>{project.title}</span>
                       <div class="flex items-center gap-2">
                         {project.website && (
@@ -279,7 +166,7 @@ const archivedProjects = projects.filter((p) => p.status === "archived");
                             href={project.website}
                             target="_blank"
                             rel="noopener noreferrer"
-                            class="project-link"
+                            class="inline-flex items-center text-gray-400 hover:text-primary-500 transition-colors duration-200"
                             onclick="event.stopPropagation()"
                             title="Website"
                           >
@@ -305,7 +192,7 @@ const archivedProjects = projects.filter((p) => p.status === "archived");
                             href={project.code}
                             target="_blank"
                             rel="noopener noreferrer"
-                            class="project-link"
+                            class="inline-flex items-center text-gray-400 hover:text-primary-500 transition-colors duration-200"
                             onclick="event.stopPropagation()"
                             title="Source Code"
                           >
@@ -330,7 +217,7 @@ const archivedProjects = projects.filter((p) => p.status === "archived");
                             href={project.paper}
                             target="_blank"
                             rel="noopener noreferrer"
-                            class="project-link"
+                            class="inline-flex items-center text-gray-400 hover:text-primary-500 transition-colors duration-200"
                             onclick="event.stopPropagation()"
                             title="Paper"
                           >
@@ -355,53 +242,56 @@ const archivedProjects = projects.filter((p) => p.status === "archived");
                         )}
                       </div>
                     </div>
-                    <div class="text-sm text-neutral-400 font-light mt-1 flex items-center justify-between">
-                      <span>{project.company} • {project.period}</span>
-                      <button class="more-info-btn text-primary-500 hover:text-primary-400 transition-colors duration-200 text-xs">
+                    <div class="text-sm text-gray-400 font-light mt-1 flex items-center justify-between">
+                      <span>
+                        {project.company} • {project.period}
+                      </span>
+                      <button class="more-info-btn bg-transparent border-none cursor-pointer font-medium text-primary-500 hover:text-primary-400 transition-colors duration-200 text-xs">
                         more ↓
                       </button>
                     </div>
                   </div>
-                  <div class="project-description">
-                    <div class="project-description-content">
-                      <p class="text-sm text-neutral-200 font-light mb-3">
+                  <div class="project-description bg-darkslate-900 border-none rounded-b-lg mt-0">
+                    <div class="project-description-content p-4">
+                      <p class="text-sm text-gray-200 font-light mb-3">
                         {project.description}
                       </p>
                       <div class="flex flex-wrap gap-1">
                         {project.technologies.map((tech) => (
-                          <span class="tech-tag">{tech}</span>
+                          <span class="inline-block bg-gray-800 text-gray-400 py-1 px-2 rounded text-xs mr-1 mt-1">{tech}</span>
                         ))}
                       </div>
                     </div>
                   </div>
                 </div>
               ))}
-          </div>
-        ) : (
-          <p class="text-neutral-400 font-light">
-            I am currently not working on any active project.
-          </p>
-        )}
+            </div>
+          ) : (
+            <p class="text-gray-400 font-light">
+              I am currently not working on any active project.
+            </p>
+          )
+        }
       </section>
 
       {
         maintenanceProjects.length > 0 && (
           <section>
-            <div class="section-header">
-              <h2 class="section-title">In Maintenance</h2>
-              <div class="info-icon">
+            <div class="flex items-center gap-2 mb-4">
+              <h2 class="text-2xl font-semibold text-gray-100">In Maintenance</h2>
+              <div class="info-icon cursor-help text-gray-500 text-base relative">
                 ⓘ
-                <div class="info-tooltip">
+                <div class="info-tooltip absolute bottom-[100%] left-1/2 -translate-x-1/2 mb-2 bg-gray-900 border border-gray-700 rounded-lg p-3 w-[250px] text-xs text-gray-400 opacity-0 pointer-events-none transition-opacity duration-200 z-100">
                   These are projects I maintain with updates, bug fixes, and
                   security patches, but no active feature development.
                 </div>
               </div>
             </div>
-            <div class="projects-list">
+            <div class="flex flex-col gap-4">
               {maintenanceProjects.map((project) => (
-                <div class="project-item">
-                  <div class="project-bar">
-                    <div class="font-semibold text-neutral-100 text-base flex items-center gap-2">
+                <div class="project-item relative">
+                  <div class="project-bar relative bg-gray-900 border border-gray-600 rounded-lg py-3 px-4 transition-colors duration-200 w-full">
+                    <div class="font-semibold text-gray-100 text-base flex items-center gap-2">
                       <span>{project.title}</span>
                       <div class="flex items-center gap-2">
                         {project.website && (
@@ -409,7 +299,7 @@ const archivedProjects = projects.filter((p) => p.status === "archived");
                             href={project.website}
                             target="_blank"
                             rel="noopener noreferrer"
-                            class="project-link"
+                            class="inline-flex items-center text-gray-400 hover:text-primary-500 transition-colors duration-200"
                             onclick="event.stopPropagation()"
                             title="Website"
                           >
@@ -435,7 +325,7 @@ const archivedProjects = projects.filter((p) => p.status === "archived");
                             href={project.code}
                             target="_blank"
                             rel="noopener noreferrer"
-                            class="project-link"
+                            class="inline-flex items-center text-gray-400 hover:text-primary-500 transition-colors duration-200"
                             onclick="event.stopPropagation()"
                             title="Source Code"
                           >
@@ -460,7 +350,7 @@ const archivedProjects = projects.filter((p) => p.status === "archived");
                             href={project.paper}
                             target="_blank"
                             rel="noopener noreferrer"
-                            class="project-link"
+                            class="inline-flex items-center text-gray-400 hover:text-primary-500 transition-colors duration-200"
                             onclick="event.stopPropagation()"
                             title="Paper"
                           >
@@ -485,21 +375,23 @@ const archivedProjects = projects.filter((p) => p.status === "archived");
                         )}
                       </div>
                     </div>
-                    <div class="text-sm text-neutral-400 font-light mt-1 flex items-center justify-between">
-                      <span>{project.company} • {project.period}</span>
-                      <button class="more-info-btn text-primary-500 hover:text-primary-400 transition-colors duration-200 text-xs">
+                    <div class="text-sm text-gray-400 font-light mt-1 flex items-center justify-between">
+                      <span>
+                        {project.company} • {project.period}
+                      </span>
+                      <button class="more-info-btn bg-transparent border-none cursor-pointer font-medium text-primary-500 hover:text-primary-400 transition-colors duration-200 text-xs">
                         more ↓
                       </button>
                     </div>
                   </div>
-                  <div class="project-description">
-                    <div class="project-description-content">
-                      <p class="text-sm text-neutral-200 font-light mb-3">
+                  <div class="project-description bg-darkslate-900 border-none rounded-b-lg mt-0">
+                    <div class="project-description-content p-4">
+                      <p class="text-sm text-gray-200 font-light mb-3">
                         {project.description}
                       </p>
                       <div class="flex flex-wrap gap-1">
                         {project.technologies.map((tech) => (
-                          <span class="tech-tag">{tech}</span>
+                          <span class="inline-block bg-gray-800 text-gray-400 py-1 px-2 rounded text-xs mr-1 mt-1">{tech}</span>
                         ))}
                       </div>
                     </div>
@@ -514,14 +406,14 @@ const archivedProjects = projects.filter((p) => p.status === "archived");
       {
         archivedProjects.length > 0 && (
           <section>
-            <div class="section-header">
-              <h2 class="section-title">Past Projects</h2>
+            <div class="flex items-center gap-2 mb-4">
+              <h2 class="text-2xl font-semibold text-gray-100">Past Projects</h2>
             </div>
-            <div class="projects-list">
+            <div class="flex flex-col gap-4">
               {archivedProjects.map((project) => (
-                <div class="project-item">
-                  <div class="project-bar">
-                    <div class="font-semibold text-neutral-100 text-base flex items-center gap-2">
+                <div class="project-item relative">
+                  <div class="project-bar relative bg-gray-900 border border-gray-600 rounded-lg py-3 px-4 transition-colors duration-200 w-full">
+                    <div class="font-semibold text-gray-100 text-base flex items-center gap-2">
                       <span>{project.title}</span>
                       <div class="flex items-center gap-2">
                         {project.website && (
@@ -529,7 +421,7 @@ const archivedProjects = projects.filter((p) => p.status === "archived");
                             href={project.website}
                             target="_blank"
                             rel="noopener noreferrer"
-                            class="project-link"
+                            class="inline-flex items-center text-gray-400 hover:text-primary-500 transition-colors duration-200"
                             onclick="event.stopPropagation()"
                             title="Website"
                           >
@@ -555,7 +447,7 @@ const archivedProjects = projects.filter((p) => p.status === "archived");
                             href={project.code}
                             target="_blank"
                             rel="noopener noreferrer"
-                            class="project-link"
+                            class="inline-flex items-center text-gray-400 hover:text-primary-500 transition-colors duration-200"
                             onclick="event.stopPropagation()"
                             title="Source Code"
                           >
@@ -580,7 +472,7 @@ const archivedProjects = projects.filter((p) => p.status === "archived");
                             href={project.paper}
                             target="_blank"
                             rel="noopener noreferrer"
-                            class="project-link"
+                            class="inline-flex items-center text-gray-400 hover:text-primary-500 transition-colors duration-200"
                             onclick="event.stopPropagation()"
                             title="Paper"
                           >
@@ -605,21 +497,23 @@ const archivedProjects = projects.filter((p) => p.status === "archived");
                         )}
                       </div>
                     </div>
-                    <div class="text-sm text-neutral-400 font-light mt-1 flex items-center justify-between">
-                      <span>{project.company} • {project.period}</span>
-                      <button class="more-info-btn text-primary-500 hover:text-primary-400 transition-colors duration-200 text-xs">
+                    <div class="text-sm text-gray-400 font-light mt-1 flex items-center justify-between">
+                      <span>
+                        {project.company} • {project.period}
+                      </span>
+                      <button class="more-info-btn bg-transparent border-none cursor-pointer font-medium text-primary-500 hover:text-primary-400 transition-colors duration-200 text-xs">
                         more ↓
                       </button>
                     </div>
                   </div>
-                  <div class="project-description">
-                    <div class="project-description-content">
-                      <p class="text-sm text-neutral-200 font-light mb-3">
+                  <div class="project-description bg-darkslate-900 border-none rounded-b-lg mt-0">
+                    <div class="project-description-content p-4">
+                      <p class="text-sm text-gray-200 font-light mb-3">
                         {project.description}
                       </p>
                       <div class="flex flex-wrap gap-1">
                         {project.technologies.map((tech) => (
-                          <span class="tech-tag">{tech}</span>
+                          <span class="inline-block bg-gray-800 text-gray-400 py-1 px-2 rounded text-xs mr-1 mt-1">{tech}</span>
                         ))}
                       </div>
                     </div>

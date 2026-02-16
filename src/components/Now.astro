@@ -1,22 +1,32 @@
 ---
 import Card from "./Card/index.astro";
 import Pulse from "./Pulse.astro";
+import { Icon } from "astro-icon/components";
 ---
 
 <Card colSpan="md:col-span-1" rowSpan="md:row-span-2">
-  <div class="flex justify-between w-full items-start mb-2">
-    <h2 class="text-xl font-bold m-0 z-20">Now</h2>
-    <Pulse />
+  <div class="flex flex-col h-full">
+    <div class="flex justify-between w-full items-start mb-2">
+      <h2 class="text-xl font-bold m-0 z-20">Now</h2>
+      <Pulse />
+    </div>
+    <p class="font-light">
+      Mainly working on my side hustle and developping <a
+        href="https://clashware.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-primary-500 hover:underline">Clashware</a
+      >.
+    </p>
+    <a
+      href="/now"
+      class="group/link flex items-center gap-1 text-sm font-medium text-white transition-colors duration-200 mt-auto self-end"
+    >
+      More details
+      <Icon
+        name="ri:arrow-right-up-line"
+        class="h-4 w-6 shrink-0 group-hover/link:text-primary-500 group-hover/link:translate-x-1 group-hover/link:-translate-y-1 transition-transform ease-in-out duration-600"
+      />
+    </a>
   </div>
-  <p class="font-light">
-    Mainly working on my side hustle and developping <a
-      href="https://clashware.com"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="text-primary-500 hover:underline">Clashware</a
-    >.
-  </p>
-  <a href="/now" class="font-light text-gray-500 cursor-pointer"
-    >Click here for more details</a
-  >
 </Card>

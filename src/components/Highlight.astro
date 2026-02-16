@@ -1,0 +1,126 @@
+---
+import Card from "./Card/index.astro";
+import { Icon } from "astro-icon/components";
+import projectsData from "../data/projects.json";
+
+interface Project {
+  title: string;
+  company: string;
+  status: string;
+  period: string;
+  description: string;
+  technologies: string[];
+  website?: string;
+  code?: string;
+  paper?: string;
+  highlight?: boolean;
+}
+
+const projects = projectsData as Project[];
+const highlights = projects.filter((p) => p.highlight);
+---
+
+<Card colSpan="md:col-span-2" rowSpan="md:row-span-2">
+  <div class="flex justify-between items-center mb-2">
+    <h2 class="text-xl font-bold m-0 z-20">Highlights</h2>
+    <a
+      href="/projects"
+      class="group/link flex items-center gap-1 text-sm font-medium text-white transition-colors duration-200"
+    >
+      All projects
+      <Icon
+        name="ri:arrow-right-up-line"
+        class="h-4 w-6 shrink-0 group-hover/link:text-primary-500 group-hover/link:translate-x-1 group-hover/link:-translate-y-1 transition-transform ease-in-out duration-600"
+      />
+    </a>
+  </div>
+  <div class="flex flex-col gap-3 mt-2">
+    {
+      highlights.map((project) => (
+        <div class="flex items-center gap-2">
+          <span class="font-semibold text-sm text-gray-100">
+            {project.title}
+          </span>
+          <div class="flex items-center gap-1.5">
+            {project.website && (
+              <a
+                href={project.website}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-gray-400 hover:text-primary-500 transition-colors duration-200"
+                title="Website"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <circle cx="12" cy="12" r="10" />
+                  <line x1="2" y1="12" x2="22" y2="12" />
+                  <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                </svg>
+              </a>
+            )}
+            {project.code && (
+              <a
+                href={project.code}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-gray-400 hover:text-primary-500 transition-colors duration-200"
+                title="Source Code"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="16 18 22 12 16 6" />
+                  <polyline points="8 6 2 12 8 18" />
+                </svg>
+              </a>
+            )}
+            {project.paper && (
+              <a
+                href={project.paper}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-gray-400 hover:text-primary-500 transition-colors duration-200"
+                title="Paper"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                  <polyline points="14 2 14 8 20 8" />
+                  <line x1="16" y1="13" x2="8" y2="13" />
+                  <line x1="16" y1="17" x2="8" y2="17" />
+                  <polyline points="10 9 9 9 8 9" />
+                </svg>
+              </a>
+            )}
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</Card>
