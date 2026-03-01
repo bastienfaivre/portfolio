@@ -13,22 +13,23 @@
     "@astrojs/sitemap": "^3.7.0",
     "@iconify-json/academicons": "^1.2.4",
     "@iconify-json/ri": "^1.2.10",
-    "astro": "^5.17.3",
+    "astro": "^5.18.0",
     "astro-icon": "^1.1.5",
     "astro-robots-txt": "^1.0.0"
   },
   "devDependencies": {
-    "@unocss/astro": "^66.6.0",
-    "@unocss/postcss": "^66.6.0",
-    "@unocss/preset-uno": "^66.6.0",
-    "@unocss/reset": "^66.6.0",
-    "unocss": "^66.6.0"
+    "@unocss/astro": "^66.6.2",
+    "@unocss/postcss": "^66.6.2",
+    "@unocss/preset-uno": "^66.6.2",
+    "@unocss/reset": "^66.6.2",
+    "unocss": "^66.6.2"
   },
   "pnpm": {
     "overrides": {
       "devalue": ">=5.6.3",
       "diff": ">=8.0.3",
-      "tar": ">=7.5.9"
+      "tar": ">=7.5.9",
+      "rollup": ">=4.59.0"
     },
     "onlyBuiltDependencies": [
       "esbuild"
