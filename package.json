@@ -10,26 +10,27 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/sitemap": "^3.7.0",
+    "@astrojs/sitemap": "^3.7.1",
     "@iconify-json/academicons": "^1.2.4",
     "@iconify-json/ri": "^1.2.10",
-    "astro": "^5.18.0",
+    "astro": "^6.0.4",
     "astro-icon": "^1.1.5",
     "astro-robots-txt": "^1.0.0"
   },
   "devDependencies": {
-    "@unocss/astro": "^66.6.2",
-    "@unocss/postcss": "^66.6.2",
-    "@unocss/preset-uno": "^66.6.2",
-    "@unocss/reset": "^66.6.2",
-    "unocss": "^66.6.2"
+    "@unocss/astro": "^66.6.6",
+    "@unocss/postcss": "^66.6.6",
+    "@unocss/preset-uno": "^66.6.6",
+    "@unocss/reset": "^66.6.6",
+    "unocss": "^66.6.6"
   },
   "pnpm": {
     "overrides": {
-      "devalue": ">=5.6.3",
+      "devalue": ">=5.6.4",
       "diff": ">=8.0.3",
-      "tar": ">=7.5.9",
-      "rollup": ">=4.59.0"
+      "tar": ">=7.5.11",
+      "rollup": ">=4.59.0",
+      "svgo": ">=4.0.1"
     },
     "onlyBuiltDependencies": [
       "esbuild"
