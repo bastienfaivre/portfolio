@@ -7,6 +7,8 @@ import AboutMe from "../components/AboutMe.astro";
 import Now from "../components/Now.astro";
 import Highlight from "../components/Highlight.astro";
 import { Image } from "astro:assets";
+
+const currentYear = new Date().getFullYear();
 ---
 
 <script>
@@ -134,7 +136,7 @@ import { Image } from "astro:assets";
     />
     <Card colSpan="md:col-span-1" rowSpan="md:row-span-1">
       <p class="text-xs">
-        © 2026 · <a
+        © {currentYear} · <a
           href="https://github.com/Ladvace/astro-bento-portfolio"
           target="_blank"
           class="text-primary-500">Base template</a
