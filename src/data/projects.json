@@ -16,11 +16,24 @@
     ]
   },
   {
+    "title": "Malachite - A Flexible BFT Consensus Engine in Rust",
+    "website": "https://www.arc.network/",
+    "code": "https://github.com/circlefin/malachite",
+    "company": "Circle",
+    "status": "active",
+    "highlight": true,
+    "period": "Sep 2024 - Present",
+    "description": "I primarily work on the P2P and networking primitives of the consensus engine, including peer discovery, node synchronization, and propagation algorithms.",
+    "technologies": [
+      "Rust",
+      "Docker"
+    ]
+  },
+  {
     "title": "libp2p-broadcast protocol implementation",
     "code": "https://github.com/bastienfaivre/libp2p-broadcast",
     "company": "Informal Systems",
-    "status": "maintenance",
-    "highlight": true,
+    "status": "archived",
     "period": "Jul 2025 - Present",
     "description": "The protocol is designed to fix the inefficiencies of libp2p-scatter, which creates a new substream and handshake for every message. Instead, it uses two long-lived substreams per peer—one inbound and one outbound—reducing RTT overhead and improving throughput. It keeps the same interface as libp2p-scatter, making it a drop-in replacement.",
     "technologies": [
@@ -32,7 +45,7 @@
     "code": "https://github.com/bastienfaivre/libp2p-dog",
     "paper": "https://bastienfaivre.com/files/master-thesis.pdf",
     "company": "Informal Systems",
-    "status": "maintenance",
+    "status": "archived",
     "period": "Dec 2024 - Present",
     "description": "I implemented the DOG protocol as a Rust libp2p module, and benchmarked it against the existing Gossipsub implementation.",
     "technologies": [
@@ -47,7 +60,7 @@
     "code": "https://github.com/circlefin/malachite",
     "paper": "https://bastienfaivre.com/files/master-thesis.pdf",
     "company": "Informal Systems",
-    "status": "maintenance",
+    "status": "archived",
     "highlight": true,
     "period": "Sep 2024 - Present",
     "description": "I designed and implemented a scalable, Modular Pyramidal Overlay (MPO) protocol leveraging state-of-the-art protocols to construct balanced, resilient, and low-diameter overlays. This work is part of Malachite, a flexible BFT consensus engine in Rust.",
@@ -62,7 +75,7 @@
     "code": "https://github.com/metacube-games/starknet-batcher",
     "paper": "https://dev.to/bastienfaivre/a-starknet-transactions-batcher-1hpk",
     "company": "Metacube Games",
-    "status": "maintenance",
+    "status": "archived",
     "period": "Dec 2024 - Present",
     "description": "The article describes the Metacube transaction batcher used to instantly send earned NFTs to players. It explains its scalable actor-based architecture and includes a detailed Go implementation.",
     "technologies": [
@@ -75,7 +88,7 @@
     "code": "https://github.com/metacube-games/starknet-signatures",
     "paper": "https://dev.to/bastienfaivre/a-guide-on-starknet-signatures-a3m",
     "company": "Metacube Games",
-    "status": "maintenance",
+    "status": "archived",
     "period": "Jul 2024 - Present",
     "description": "The article explains how signing and signature verification work on Starknet under Account Abstraction. It includes TypeScript and Go examples for signing messages and verifying signatures using either a public key or an account address.",
     "technologies": [
@@ -87,7 +100,7 @@
     "title": "Starknet ID Go Library",
     "code": "https://github.com/metacube-games/starknetid.go",
     "company": "Metacube Games",
-    "status": "maintenance",
+    "status": "archived",
     "period": "Jun 2024 - Present",
     "description": "A Go library to interact with the Starknet.id protocol.",
     "technologies": [
@@ -99,7 +112,7 @@
     "website": "https://play.metacube.games/",
     "code": "https://github.com/orgs/metacube-games",
     "company": "Metacube Games",
-    "status": "maintenance",
+    "status": "archived",
     "highlight": true,
     "period": "Oct 2022 - Present",
     "description": "I designed and built the complete backend (DevOps, Infrastructure, API, etc.) of the game. This project is responsible for most of my actual skills and experience in software engineering!",
