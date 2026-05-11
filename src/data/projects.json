@@ -1,5 +1,17 @@
 [
   {
+    "title": "findyour.club - The essentials on every club near you",
+    "website": "https://findyour.club",
+    "company": "Personal Project",
+    "status": "maintenance",
+    "period": "Mar 2026 - Present",
+    "description": "I highly value social interactions and want to help people find a group that shares their interests. To that end, this platform aims to collect only the essentials for each club and association.",
+    "technologies": [
+      "Typescript",
+      "Docker"
+    ]
+  },
+  {
     "title": "Dropmail - An embeddable email collection form",
     "website": "https://dropmail.bastienfaivre.com/?source=portfolio",
     "code": "https://github.com/bastienfaivre/dropmail",
@@ -109,8 +121,8 @@
   },
   {
     "title": "Metacube - A massive multiplayer game on Starknet",
-    "website": "https://play.metacube.games/",
-    "code": "https://github.com/orgs/metacube-games",
+    "website": "https://metacube.games",
+    "code": "https://github.com/metacube-games/metacube.games",
     "company": "Metacube Games",
     "status": "archived",
     "highlight": true,
