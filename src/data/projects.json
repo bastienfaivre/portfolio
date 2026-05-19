@@ -46,7 +46,7 @@
     "code": "https://github.com/bastienfaivre/libp2p-broadcast",
     "company": "Informal Systems",
     "status": "archived",
-    "period": "Jul 2025 - Present",
+    "period": "Jun 2025 - Jul 2025",
     "description": "The protocol is designed to fix the inefficiencies of libp2p-scatter, which creates a new substream and handshake for every message. Instead, it uses two long-lived substreams per peer—one inbound and one outbound—reducing RTT overhead and improving throughput. It keeps the same interface as libp2p-scatter, making it a drop-in replacement.",
     "technologies": [
       "Rust"
@@ -58,7 +58,7 @@
     "paper": "https://bastienfaivre.com/files/master-thesis.pdf",
     "company": "Informal Systems",
     "status": "archived",
-    "period": "Dec 2024 - Present",
+    "period": "Dec 2024 - Mar 2025",
     "description": "I implemented the DOG protocol as a Rust libp2p module, and benchmarked it against the existing Gossipsub implementation.",
     "technologies": [
       "Rust",
@@ -74,7 +74,7 @@
     "company": "Informal Systems",
     "status": "archived",
     "highlight": true,
-    "period": "Sep 2024 - Present",
+    "period": "Sep 2024 - Mar 2025",
     "description": "I designed and implemented a scalable, Modular Pyramidal Overlay (MPO) protocol leveraging state-of-the-art protocols to construct balanced, resilient, and low-diameter overlays. This work is part of Malachite, a flexible BFT consensus engine in Rust.",
     "technologies": [
       "Rust",
@@ -88,7 +88,7 @@
     "paper": "https://dev.to/bastienfaivre/a-starknet-transactions-batcher-1hpk",
     "company": "Metacube Games",
     "status": "archived",
-    "period": "Dec 2024 - Present",
+    "period": "Dec 2024 - May 2025",
     "description": "The article describes the Metacube transaction batcher used to instantly send earned NFTs to players. It explains its scalable actor-based architecture and includes a detailed Go implementation.",
     "technologies": [
       "Go"
@@ -101,7 +101,7 @@
     "paper": "https://dev.to/bastienfaivre/a-guide-on-starknet-signatures-a3m",
     "company": "Metacube Games",
     "status": "archived",
-    "period": "Jul 2024 - Present",
+    "period": "Jul 2024 - May 2025",
     "description": "The article explains how signing and signature verification work on Starknet under Account Abstraction. It includes TypeScript and Go examples for signing messages and verifying signatures using either a public key or an account address.",
     "technologies": [
       "Typescript",
@@ -113,7 +113,7 @@
     "code": "https://github.com/metacube-games/starknetid.go",
     "company": "Metacube Games",
     "status": "archived",
-    "period": "Jun 2024 - Present",
+    "period": "Jun 2024 - May 2025",
     "description": "A Go library to interact with the Starknet.id protocol.",
     "technologies": [
       "Go"
@@ -126,7 +126,7 @@
     "company": "Metacube Games",
     "status": "archived",
     "highlight": true,
-    "period": "Oct 2022 - Present",
+    "period": "Oct 2022 - May 2025",
     "description": "I designed and built the complete backend (DevOps, Infrastructure, API, etc.) of the game. This project is responsible for most of my actual skills and experience in software engineering!",
     "technologies": [
       "C++",
