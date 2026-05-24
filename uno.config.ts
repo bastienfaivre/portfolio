@@ -1,5 +1,5 @@
 // uno.config.ts
-import { defineConfig, presetUno } from "unocss";
+import { defineConfig, presetWind3 } from "unocss";
 
 export default defineConfig({
   content: {
@@ -55,5 +55,5 @@ export default defineConfig({
       },
     },
   },
-  presets: [presetUno()],
+  presets: [presetWind3()],
 });

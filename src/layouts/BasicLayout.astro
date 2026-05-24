@@ -67,7 +67,7 @@ const allSchemas = [personSchema, ...schemas];
     <meta name="twitter:image" content={image} />
 
     {allSchemas.map((schema) => (
-      <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+      <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />
     ))}
   </head>
   <body

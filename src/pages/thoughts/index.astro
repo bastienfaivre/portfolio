@@ -1,0 +1,197 @@
+---
+import { getCollection, render } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import { createWebPageSchema, createBreadcrumbSchema } from "../../lib/seo";
+
+const webPageSchema = createWebPageSchema(
+  "Thoughts",
+  "Reflections, notes, and half-formed ideas",
+  "https://bastienfaivre.com/thoughts",
+);
+
+const breadcrumbSchema = createBreadcrumbSchema([
+  { name: "Home", url: "https://bastienfaivre.com" },
+  { name: "Thoughts" },
+]);
+
+const rawEntries = (
+  await getCollection("thoughts", ({ data }) => !data.draft)
+).sort((a, b) => {
+  const dateDiff = b.data.date.getTime() - a.data.date.getTime();
+  if (dateDiff !== 0) return dateDiff;
+  return b.id.localeCompare(a.id);
+});
+
+const entries = await Promise.all(
+  rawEntries.map(async (entry) => {
+    const { Content } = await render(entry);
+    return { entry, Content };
+  }),
+);
+
+const dateFormatter = new Intl.DateTimeFormat("en-US", {
+  year: "numeric",
+  month: "short",
+  day: "numeric",
+});
+---
+
+<script>
+  window.addEventListener("load", () => {
+    const loader = document.querySelector(".loader") as HTMLElement;
+    if (loader) {
+      setTimeout(() => {
+        loader.classList.add("loader-hidden");
+      }, 100);
+    }
+  });
+</script>
+
+<style is:global>
+  html {
+    scroll-behavior: smooth;
+  }
+
+  article.thought :is(h2, h3, h4) {
+    color: #f3f4f6;
+    font-weight: 600;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+  article.thought h2 {
+    font-size: 1.25rem;
+  }
+  article.thought h3 {
+    font-size: 1.1rem;
+  }
+  article.thought p {
+    color: #e5e7eb;
+    font-weight: 300;
+    line-height: 1.7;
+    margin: 0 0 1rem 0;
+  }
+  article.thought :is(strong, b) {
+    font-weight: 700;
+    color: #f3f4f6;
+  }
+  article.thought :is(em, i) {
+    font-style: italic;
+  }
+  article.thought a {
+    color: #8c2da5;
+    text-decoration: none;
+  }
+  article.thought a:hover {
+    text-decoration: underline;
+  }
+  article.thought ul,
+  article.thought ol {
+    color: #e5e7eb;
+    font-weight: 300;
+    line-height: 1.7;
+    padding-left: 1.5rem;
+    margin: 0 0 1rem 0;
+  }
+  article.thought code {
+    background: #1f2937;
+    color: #e5e7eb;
+    padding: 0.125rem 0.375rem;
+    border-radius: 0.25rem;
+    font-size: 0.875em;
+  }
+  article.thought pre {
+    background: #0f172a;
+    border: 1px solid #374151;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    overflow-x: auto;
+    margin: 0 0 1rem 0;
+  }
+  article.thought pre code {
+    background: transparent;
+    padding: 0;
+  }
+  article.thought blockquote {
+    border-left: 3px solid #4b5563;
+    padding-left: 1rem;
+    margin: 0 0 1rem 0;
+    color: #d1d5db;
+    font-style: italic;
+  }
+
+  .thought-anchor {
+    color: #525252;
+    opacity: 0;
+    transition: opacity 0.15s;
+    text-decoration: none;
+    margin-left: 0.5rem;
+    font-weight: 400;
+  }
+  .thought-heading:hover .thought-anchor,
+  .thought-anchor:focus {
+    opacity: 1;
+  }
+  :target > .thought-heading .thought-title {
+    color: #8c2da5;
+  }
+</style>
+
+<Layout
+  title="Bastien Faivre - Thoughts"
+  description="Reflections, notes, and half-formed ideas"
+  schemas={[webPageSchema, breadcrumbSchema]}
+>
+  <main
+    class="w-screen h-screen flex flex-col justify-start items-start max-w-3xl mx-auto p-8 overflow-y-auto"
+  >
+    <a
+      href="/"
+      class="text-gray-100 bg-gray-900 hover:bg-gray-800 hover:border-primary-500 px-4 py-2 mb-8 border-1 border-solid border-gray-600 rounded-lg font-light inline-block transition-colors duration-200"
+    >
+      Back
+    </a>
+
+    <h1 class="text-4xl font-bold mb-2 text-gray-100">Thoughts</h1>
+    <p class="text-lg text-gray-200 font-light mb-12">
+      Reflections, notes, and half-formed ideas. The format is inspired by <a
+        href="https://en.wikipedia.org/wiki/Meditations"
+        class="text-primary-500 hover:underline">Marcus Aurelius' Meditations</a
+      >.
+    </p>
+
+    {
+      entries.length === 0 ? (
+        <p class="text-gray-400 font-light">Nothing here yet.</p>
+      ) : (
+        <div class="flex flex-col gap-12 pb-16 w-full">
+          {entries.map(({ entry, Content }, index) => (
+            <section id={entry.id} class="scroll-mt-8">
+              <header class="thought-heading flex items-baseline justify-between gap-4 mb-4 pb-2 border-b border-gray-700">
+                <h2 class="thought-title text-xl font-semibold text-gray-100 m-0 transition-colors">
+                  <span class="text-gray-500 font-light mr-2">#{entries.length - index}</span>
+                  {entry.data.title}
+                  <a
+                    href={`#${entry.id}`}
+                    class="thought-anchor"
+                    aria-label="Link to this thought"
+                  >
+                    #
+                  </a>
+                </h2>
+                <time
+                  datetime={entry.data.date.toISOString()}
+                  class="text-sm text-gray-400 font-light whitespace-nowrap"
+                >
+                  {dateFormatter.format(entry.data.date)}
+                </time>
+              </header>
+              <article class="thought">
+                <Content />
+              </article>
+            </section>
+          ))}
+        </div>
+      )
+    }
+  </main>
+</Layout>

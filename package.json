@@ -13,16 +13,19 @@
     "@astrojs/sitemap": "^3.7.2",
     "@iconify-json/academicons": "^1.2.4",
     "@iconify-json/ri": "^1.2.10",
-    "astro": "^6.3.5",
+    "astro": "^6.3.7",
     "astro-icon": "^1.1.5",
-    "astro-robots-txt": "^1.0.0"
+    "astro-robots-txt": "^1.0.0",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
-    "@unocss/astro": "^66.6.8",
-    "@unocss/postcss": "^66.6.8",
-    "@unocss/preset-uno": "^66.6.8",
-    "@unocss/reset": "^66.6.8",
-    "unocss": "^66.6.8"
+    "@astrojs/check": "^0.9.9",
+    "@unocss/astro": "^66.7.0",
+    "@unocss/postcss": "^66.7.0",
+    "@unocss/preset-uno": "^66.7.0",
+    "@unocss/reset": "^66.7.0",
+    "typescript": "^6.0.3",
+    "unocss": "^66.7.0"
   },
   "pnpm": {
     "overrides": {
