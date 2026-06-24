@@ -13,7 +13,7 @@
     "@astrojs/sitemap": "^3.7.3",
     "@iconify-json/academicons": "^1.2.4",
     "@iconify-json/ri": "^1.2.10",
-    "astro": "^6.4.6",
+    "astro": "^7.0.2",
     "astro-icon": "^1.1.5",
     "astro-robots-txt": "^1.0.0",
     "zod": "^4.4.3"
@@ -36,7 +36,8 @@
       "svgo": ">=4.0.1",
       "yaml": ">=2.8.3",
       "uuid": ">=14.0.0",
-      "esbuild": ">=0.28.1"
+      "esbuild": ">=0.28.1",
+      "@opentelemetry/core": ">=2.8.0"
     },
     "onlyBuiltDependencies": [
       "esbuild"
