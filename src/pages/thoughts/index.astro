@@ -47,6 +47,148 @@ const dateFormatter = new Intl.DateTimeFormat("en-US", {
   });
 </script>
 
+<script>
+  const WIDE = "(min-width: 1480px)";
+
+  // Rewrite footnote ids to a unique #<thought>-<note> since every thought shares this page
+  function scopeFootnoteIds() {
+    const rename = (thought: string, id: string) => {
+      if (id.startsWith("user-content-fn-"))
+        return `${thought}-${id.replace("user-content-fn-", "")}`;
+      if (id === "footnote-label") return `${thought}-footnote-label`;
+      return id;
+    };
+
+    document.querySelectorAll<HTMLElement>("section[id]").forEach((section) => {
+      if (section.dataset.snScoped) return;
+      const thought = section.id;
+
+      section
+        .querySelectorAll<HTMLElement>('[id^="user-content-fnref-"]')
+        .forEach((el) => el.removeAttribute("id"));
+
+      section
+        .querySelectorAll<HTMLElement>('[id^="user-content-fn-"], [id="footnote-label"]')
+        .forEach((el) => (el.id = rename(thought, el.id)));
+
+      section
+        .querySelectorAll<HTMLAnchorElement>('a[href^="#user-content-fn-"]')
+        .forEach((a) =>
+          a.setAttribute("href", "#" + rename(thought, a.getAttribute("href")!.slice(1))),
+        );
+
+      section
+        .querySelectorAll<HTMLElement>('[aria-describedby="footnote-label"]')
+        .forEach((el) =>
+          el.setAttribute("aria-describedby", `${thought}-footnote-label`),
+        );
+
+      section.dataset.snScoped = "1";
+    });
+  }
+
+  function layoutSidenotes() {
+    const wide = window.matchMedia(WIDE).matches;
+
+    document.querySelectorAll<HTMLElement>("article.thought").forEach((article) => {
+      const footnotes = article.querySelector<HTMLElement>(".footnotes");
+      if (!footnotes) return;
+      const items = Array.from(
+        footnotes.querySelectorAll<HTMLElement>("ol > li"),
+      );
+
+      if (!wide) {
+        items.forEach((li) => (li.style.marginTop = ""));
+        return;
+      }
+
+      items.forEach((li) => (li.style.marginTop = ""));
+
+      const articleTop = article.getBoundingClientRect().top + window.scrollY;
+      let cursor = articleTop;
+
+      items.forEach((li) => {
+        const ref = article.querySelector<HTMLElement>(
+          `sup a[href="#${CSS.escape(li.id)}"]`,
+        );
+        const refTop = ref
+          ? ref.getBoundingClientRect().top + window.scrollY
+          : cursor;
+        const target = Math.max(refTop, cursor);
+        const liTop = li.getBoundingClientRect().top + window.scrollY;
+        const delta = target - liTop;
+        if (delta > 0) li.style.marginTop = `${delta}px`;
+        cursor =
+          li.getBoundingClientRect().top + window.scrollY + li.offsetHeight + 12;
+      });
+    });
+  }
+
+  function wireHighlights() {
+    document.querySelectorAll<HTMLElement>("article.thought").forEach((article) => {
+      article.querySelectorAll<HTMLElement>(".footnotes ol > li").forEach((li) => {
+        const ref = article
+          .querySelector<HTMLElement>(`sup a[href="#${CSS.escape(li.id)}"]`)
+          ?.closest("sup");
+        if (!ref) return;
+        const on = () => {
+          li.classList.add("sn-active");
+          ref.querySelector("a")?.classList.add("sn-active");
+        };
+        const off = () => {
+          li.classList.remove("sn-active");
+          ref.querySelector("a")?.classList.remove("sn-active");
+        };
+        li.addEventListener("mouseenter", on);
+        li.addEventListener("mouseleave", off);
+        ref.addEventListener("mouseenter", on);
+        ref.addEventListener("mouseleave", off);
+      });
+    });
+  }
+
+  function wireBackrefs() {
+    document.querySelectorAll<HTMLElement>("article.thought").forEach((article) => {
+      article
+        .querySelectorAll<HTMLElement>(".footnotes a[data-footnote-backref]")
+        .forEach((backref) => {
+          const li = backref.closest("li");
+          const marker = li
+            ? article.querySelector<HTMLElement>(`sup a[href="#${CSS.escape(li.id)}"]`)
+            : null;
+          if (!marker) return;
+
+          backref.removeAttribute("href");
+          backref.setAttribute("role", "button");
+          backref.setAttribute("tabindex", "0");
+
+          const go = () =>
+            marker.scrollIntoView({ behavior: "smooth", block: "center" });
+          backref.addEventListener("click", go);
+          backref.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              go();
+            }
+          });
+        });
+    });
+  }
+
+  scopeFootnoteIds();
+  wireHighlights();
+  wireBackrefs();
+  layoutSidenotes();
+  if (document.fonts?.ready) document.fonts.ready.then(layoutSidenotes);
+  window.addEventListener("load", layoutSidenotes);
+
+  let raf = 0;
+  window.addEventListener("resize", () => {
+    cancelAnimationFrame(raf);
+    raf = requestAnimationFrame(layoutSidenotes);
+  });
+</script>
+
 <style is:global>
   html {
     scroll-behavior: smooth;
@@ -131,8 +273,138 @@ const dateFormatter = new Intl.DateTimeFormat("en-US", {
   .thought-anchor:focus {
     opacity: 1;
   }
+  @media (hover: none) {
+    .thought-anchor {
+      opacity: 1;
+    }
+  }
   :target > .thought-heading .thought-title {
     color: #8c2da5;
+  }
+
+  article.thought sup a[data-footnote-ref] {
+    color: #9ca3af;
+    font-weight: 400;
+    text-decoration: none;
+    padding: 0 0.15em;
+  }
+  article.thought sup a[data-footnote-ref]:hover,
+  article.thought sup a[data-footnote-ref].sn-active {
+    text-decoration: underline;
+  }
+
+  /* Narrow: notes sit below their thought */
+  article.thought .footnotes {
+    margin-top: 2rem;
+    font-size: 0.85rem;
+  }
+  article.thought .footnotes::before {
+    content: "Notes";
+    display: block;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.7rem;
+    color: #6b7280;
+    margin-bottom: 0.75rem;
+  }
+  article.thought .footnotes h2 {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+  article.thought .footnotes ol {
+    color: #9ca3af;
+    font-weight: 300;
+    line-height: 1.6;
+    list-style: none;
+    padding-left: 1.75rem;
+    margin: 0;
+    counter-reset: sn;
+  }
+  article.thought .footnotes li {
+    counter-increment: sn;
+    position: relative;
+    margin: 0 0 0.6rem 0;
+  }
+  article.thought .footnotes li::before {
+    content: counter(sn) ".";
+    position: absolute;
+    left: -1.75rem;
+    width: 1.5rem;
+    text-align: right;
+    color: #9ca3af;
+  }
+  article.thought .footnotes p {
+    color: #9ca3af;
+    font-weight: 300;
+    line-height: 1.6;
+    margin: 0;
+    display: inline;
+  }
+  article.thought .footnotes a {
+    color: #9ca3af;
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+  }
+  article.thought .footnotes a:hover {
+    color: #e5e7eb;
+  }
+  article.thought .footnotes a[data-footnote-backref] {
+    color: #6b7280;
+    text-decoration: none;
+    margin-left: 0.3em;
+    cursor: pointer;
+  }
+  article.thought .footnotes a[data-footnote-backref]:hover {
+    color: #e5e7eb;
+  }
+
+  /* Wide: notes move into the right margin */
+  @media (min-width: 1480px) {
+    article.thought {
+      position: relative;
+    }
+    article.thought .footnotes {
+      position: absolute;
+      top: 0;
+      left: calc(100% + 2rem);
+      width: 300px;
+      margin: 0;
+      padding: 0;
+    }
+    article.thought .footnotes::before {
+      display: none;
+    }
+    article.thought .footnotes ol {
+      padding: 0;
+    }
+    article.thought .footnotes li {
+      margin: 0;
+      padding: 0.5rem 0 0.5rem 1.75rem;
+      opacity: 0.75;
+      transition: opacity 0.2s ease;
+    }
+    article.thought .footnotes li::before {
+      content: counter(sn);
+      left: 0;
+      top: 0.5rem;
+      width: auto;
+      text-align: left;
+      font-size: 0.75rem;
+    }
+    article.thought .footnotes li:hover,
+    article.thought .footnotes li.sn-active {
+      opacity: 1;
+    }
+    article.thought .footnotes a[data-footnote-backref] {
+      display: none;
+    }
   }
 </style>
 
