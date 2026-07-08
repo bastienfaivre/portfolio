@@ -152,25 +152,24 @@ const dateFormatter = new Intl.DateTimeFormat("en-US", {
       article
         .querySelectorAll<HTMLElement>(".footnotes a[data-footnote-backref]")
         .forEach((backref) => {
+          backref.removeAttribute("href");
+          backref.setAttribute("role", "button");
+          backref.setAttribute("tabindex", "0");
+          backref.textContent = "↩︎";
+
           const li = backref.closest("li");
           const marker = li
             ? article.querySelector<HTMLElement>(`sup a[href="#${CSS.escape(li.id)}"]`)
             : null;
           if (!marker) return;
 
-          backref.removeAttribute("href");
-          backref.setAttribute("role", "button");
-          backref.setAttribute("tabindex", "0");
-          backref.textContent = "↩︎";
-
-          const go = () =>
-            marker.scrollIntoView({ behavior: "smooth", block: "center" });
+          const go = (e: Event) => {
+            e.preventDefault();
+            marker.scrollIntoView({ behavior: "smooth", block: "nearest" });
+          };
           backref.addEventListener("click", go);
           backref.addEventListener("keydown", (e) => {
-            if (e.key === "Enter" || e.key === " ") {
-              e.preventDefault();
-              go();
-            }
+            if (e.key === "Enter" || e.key === " ") go(e);
           });
         });
     });
