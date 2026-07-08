@@ -161,6 +161,7 @@ const dateFormatter = new Intl.DateTimeFormat("en-US", {
           backref.removeAttribute("href");
           backref.setAttribute("role", "button");
           backref.setAttribute("tabindex", "0");
+          backref.textContent = "↩︎";
 
           const go = () =>
             marker.scrollIntoView({ behavior: "smooth", block: "center" });
