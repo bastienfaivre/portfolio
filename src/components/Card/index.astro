@@ -31,7 +31,7 @@ const { title, body, colSpan, rowSpan, href, target, colorText, height } =
       <a
         href={href}
         target={target}
-        class={`h-full w-full ${colorText || " "}`}
+        class={`block h-full w-full after:absolute after:inset-0 after:content-[''] ${colorText || " "}`}
       >
         <Icon
           name="ri:arrow-right-up-line"

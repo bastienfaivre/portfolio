@@ -1,6 +1,8 @@
 ---
 import { getCollection, render } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
+import Button from "../../components/Button.astro";
+import { Icon } from "astro-icon/components";
 import { createWebPageSchema, createBreadcrumbSchema } from "../../lib/seo";
 
 const webPageSchema = createWebPageSchema(
@@ -416,11 +418,13 @@ const dateFormatter = new Intl.DateTimeFormat("en-US", {
   <main
     class="w-screen min-h-screen flex flex-col justify-start items-start max-w-3xl mx-auto p-8"
   >
-    <a
-      href="/"
-      class="text-gray-100 bg-gray-900 hover:bg-gray-800 hover:border-primary-500 px-4 py-2 mb-8 border-1 border-solid border-gray-600 rounded-lg font-light inline-block transition-colors duration-200"
-    >
-      Back
+    <a href="/" class="mb-8 inline-block">
+      <Button>
+        <span class="flex items-center gap-2">
+          <Icon name="ri:arrow-left-line" class="h-5" />
+          Back
+        </span>
+      </Button>
     </a>
 
     <h1 class="text-4xl font-bold mb-2 text-gray-100">Thoughts</h1>
