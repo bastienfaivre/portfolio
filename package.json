@@ -10,22 +10,22 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/sitemap": "^3.7.3",
+    "@astrojs/sitemap": "^3.7.4",
     "@iconify-json/academicons": "^1.2.4",
     "@iconify-json/ri": "^1.2.10",
-    "astro": "^7.2.8",
+    "astro": "^7.3.1",
     "astro-icon": "^1.2.0",
     "astro-robots-txt": "^1.0.0",
-    "zod": "^4.4.3"
+    "zod": "^4.5.4"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
-    "@unocss/astro": "^66.8.1",
-    "@unocss/postcss": "^66.8.1",
-    "@unocss/preset-uno": "^66.8.1",
-    "@unocss/reset": "^66.8.1",
+    "@unocss/astro": "^66.10.0",
+    "@unocss/postcss": "^66.10.0",
+    "@unocss/preset-uno": "^66.10.0",
+    "@unocss/reset": "^66.10.0",
     "typescript": "^7.0.2",
-    "unocss": "^66.8.1"
+    "unocss": "^66.10.0"
   },
   "pnpm": {
     "overrides": {
