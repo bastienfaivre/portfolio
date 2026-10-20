@@ -1,0 +1,133 @@
+/* Footnotes rendered as sidenotes; behavior lives in src/lib/sidenotes.ts */
+
+article.sidenotes sup a[data-footnote-ref] {
+  color: #9ca3af;
+  font-weight: 400;
+  text-decoration: none;
+  padding: 0 0.15em;
+}
+article.sidenotes sup a[data-footnote-ref]:hover,
+article.sidenotes sup a[data-footnote-ref].sn-active {
+  text-decoration: underline;
+}
+
+/* Narrow: notes sit below their article */
+article.sidenotes .footnotes {
+  margin-top: 2rem;
+  font-size: 0.85rem;
+}
+article.sidenotes .footnotes::before {
+  content: "Notes";
+  display: block;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.7rem;
+  color: #6b7280;
+  margin-bottom: 0.75rem;
+}
+article.sidenotes .footnotes h2 {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+article.sidenotes .footnotes ol {
+  color: #9ca3af;
+  font-weight: 300;
+  line-height: 1.6;
+  list-style: none;
+  padding-left: 1.75rem;
+  margin: 0;
+  counter-reset: sn;
+}
+article.sidenotes .footnotes li {
+  counter-increment: sn;
+  position: relative;
+  margin: 0 0 0.6rem 0;
+}
+article.sidenotes .footnotes li:last-child {
+  margin-bottom: 0;
+}
+article.sidenotes .footnotes li::before {
+  content: counter(sn) ".";
+  position: absolute;
+  left: -1.75rem;
+  width: 1.5rem;
+  text-align: right;
+  color: #9ca3af;
+}
+article.sidenotes .footnotes p {
+  color: #9ca3af;
+  font-weight: 300;
+  line-height: 1.6;
+  margin: 0;
+  display: inline;
+}
+article.sidenotes .footnotes a {
+  color: #9ca3af;
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+article.sidenotes .footnotes a:hover {
+  color: #e5e7eb;
+}
+article.sidenotes .footnotes a[data-footnote-backref] {
+  color: #6b7280;
+  text-decoration: none;
+  margin-left: 0.3em;
+  cursor: pointer;
+}
+article.sidenotes .footnotes a[data-footnote-backref]:hover {
+  color: #e5e7eb;
+}
+
+/* Wide: notes move into the right margin */
+@media (min-width: 1480px) {
+  article.sidenotes {
+    position: relative;
+  }
+  article.sidenotes .footnotes {
+    position: absolute;
+    top: 0;
+    left: calc(100% + 2rem);
+    width: 300px;
+    margin: 0;
+    padding: 0;
+  }
+  article.sidenotes .footnotes::before {
+    display: none;
+  }
+  /* Footnotes leave the flow, so the block before them ends the article */
+  article.sidenotes > :has(+ .footnotes:last-child) {
+    margin-bottom: 0;
+  }
+  article.sidenotes .footnotes ol {
+    padding: 0;
+  }
+  article.sidenotes .footnotes li {
+    margin: 0;
+    padding: 0.5rem 0 0.5rem 1.75rem;
+    opacity: 0.75;
+    transition: opacity 0.2s ease;
+  }
+  article.sidenotes .footnotes li::before {
+    content: counter(sn);
+    left: 0;
+    top: 0.5rem;
+    width: auto;
+    text-align: left;
+    font-size: 0.75rem;
+  }
+  article.sidenotes .footnotes li:hover,
+  article.sidenotes .footnotes li.sn-active {
+    opacity: 1;
+  }
+  article.sidenotes .footnotes a[data-footnote-backref] {
+    display: none;
+  }
+}

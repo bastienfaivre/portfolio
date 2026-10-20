@@ -4,4 +4,5 @@ export const LINKS = {
   x: "https://x.com/std_lock_guard",
   devto: "https://dev.to/bastienfaivre",
   resume: "https://bastienfaivre.com/files/cv-bastien-faivre.pdf",
+  email: "mailto:contact@bastienfaivre.com",
 };

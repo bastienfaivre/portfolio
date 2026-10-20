@@ -19,4 +19,8 @@ export default defineConfig({
     icon(),
   ],
   output: "static",
+  redirects: {
+    "/guide": "/guides",
+    "/guides/[slug]": "/guide/[slug]",
+  },
 });

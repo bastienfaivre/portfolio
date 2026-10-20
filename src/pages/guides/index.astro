@@ -1,0 +1,96 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import Button from "../../components/Button.astro";
+import { Icon } from "astro-icon/components";
+import { createWebPageSchema, createBreadcrumbSchema } from "../../lib/seo";
+
+const webPageSchema = createWebPageSchema(
+  "Guides",
+  "Practical content I update regularly",
+  "https://bastienfaivre.com/guides",
+);
+
+const breadcrumbSchema = createBreadcrumbSchema([
+  { name: "Home", url: "https://bastienfaivre.com" },
+  { name: "Guides" },
+]);
+
+const lastUpdate = (guide: { data: { date: Date; updated?: Date } }) =>
+  guide.data.updated ?? guide.data.date;
+
+const guides = (await getCollection("guides", ({ data }) => !data.draft)).sort(
+  (a, b) => lastUpdate(b).getTime() - lastUpdate(a).getTime(),
+);
+
+const dateFormatter = new Intl.DateTimeFormat("en-US", {
+  year: "numeric",
+  month: "short",
+  day: "numeric",
+});
+---
+
+<script>
+  window.addEventListener("load", () => {
+    const loader = document.querySelector(".loader") as HTMLElement;
+    if (loader) {
+      setTimeout(() => {
+        loader.classList.add("loader-hidden");
+      }, 100);
+    }
+  });
+</script>
+
+<Layout
+  title="Bastien Faivre - Guides"
+  description="Practical content I update regularly"
+  schemas={[webPageSchema, breadcrumbSchema]}
+>
+  <main
+    class="w-screen min-h-screen flex flex-col justify-start items-start max-w-3xl mx-auto p-8"
+  >
+    <a href="/" class="mb-8 inline-block">
+      <Button>
+        <span class="flex items-center gap-2">
+          <Icon name="ri:arrow-left-line" class="h-5" />
+          Home
+        </span>
+      </Button>
+    </a>
+
+    <h1 class="text-4xl font-bold mb-2 text-gray-100">Guides</h1>
+    <p class="text-lg text-gray-200 font-light mb-12">
+      Practical content I update regularly.
+    </p>
+
+    {
+      guides.length === 0 ? (
+        <p class="text-gray-400 font-light">Nothing here yet.</p>
+      ) : (
+        <ul class="flex flex-col gap-4 w-full list-none p-0 m-0">
+          {guides.map((guide) => (
+            <li>
+              <a
+                href={`/guide/${guide.id}`}
+                class="block bg-gray-900 border border-gray-600 rounded-lg py-3 px-4 hover:border-primary-500 transition-colors duration-200 no-underline"
+              >
+                <div class="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
+                  <span class="font-semibold text-gray-100 text-base">
+                    {guide.data.title}
+                  </span>
+                  <span class="text-sm text-gray-400 font-light whitespace-nowrap">
+                    {guide.data.version && `v${guide.data.version} · `}
+                    <time datetime={lastUpdate(guide).toISOString()}>
+                      {guide.data.updated && "Updated "}
+                      {dateFormatter.format(lastUpdate(guide))}
+                    </time>
+                  </span>
+                </div>
+              </a>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </main>
+</Layout>

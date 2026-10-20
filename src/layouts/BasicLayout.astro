@@ -135,6 +135,14 @@ const allSchemas = [personSchema, ...schemas];
     font-weight: 700 !important;
   }
 
+  /* Page spacing rule: main's padding is the only space around the content,
+     so the bottom matches the top. The last block (and the last element of an
+     article) must not add trailing margin. */
+  main > :last-child,
+  main article > :last-child {
+    margin-bottom: 0 !important;
+  }
+
   /* Code snippets */
   code,
   pre,

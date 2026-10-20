@@ -2,14 +2,22 @@
 import Card from "./Card/index.astro";
 ---
 
-<Card colSpan="md:col-span-1" rowSpan="md:row-span-2" title="About me">
+<Card
+  colSpan="md:col-span-2 lg:col-span-1"
+  rowSpan="md:row-span-2 lg:row-span-3"
+  title="About me"
+>
   <div class="flex flex-col gap-2 mt-2">
     <p class="font-light">
       Software engineer based in Switzerland. I graduated from <a
         href="https://epfl.ch/"
         target="_blank"
         class="text-primary-500">EPFL</a
-      > in 2025 with a MSc in Computer Science.
+      > in 2025 with a MSc in Computer Science.<br /><br />My stack is made of <b
+        class="font-bold">Claude</b
+      >, <b class="font-bold">Rust</b>, <b class="font-bold">Coffee</b> and my <b
+        class="font-bold">brain</b
+      >.
     </p>
   </div>
 </Card>

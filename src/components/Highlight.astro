@@ -20,7 +20,10 @@ const projects = projectsData as Project[];
 const highlights = projects.filter((p) => p.highlight);
 ---
 
-<Card colSpan="md:col-span-2" rowSpan="md:row-span-2">
+<Card
+  colSpan="md:col-span-2 lg:col-span-2"
+  rowSpan="md:row-span-2 lg:row-span-2"
+>
   <div class="flex justify-between items-center mb-2">
     <h2 class="text-xl font-bold m-0 z-20">Highlights</h2>
     <a

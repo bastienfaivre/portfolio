@@ -34,7 +34,6 @@ const projects = projectsData as Project[];
 const activeProjects = projects.filter((p) => p.status === "active");
 const maintenanceProjects = projects.filter((p) => p.status === "maintenance");
 const archivedProjects = projects.filter((p) => p.status === "archived");
-
 ---
 
 <style is:global>
@@ -145,7 +144,7 @@ const archivedProjects = projects.filter((p) => p.status === "archived");
       <Button>
         <span class="flex items-center gap-2">
           <Icon name="ri:arrow-left-line" class="h-5" />
-          Back
+          Home
         </span>
       </Button>
     </a>
@@ -155,7 +154,7 @@ const archivedProjects = projects.filter((p) => p.status === "archived");
       Projects I've worked on throughout my career
     </p>
 
-    <div class="flex flex-col gap-12 pb-8 w-full">
+    <div class="flex flex-col gap-12 w-full">
       <section>
         <div class="flex items-center gap-2 mb-4">
           <h2 class="text-2xl font-semibold text-gray-100">Active Projects</h2>
@@ -272,7 +271,9 @@ const archivedProjects = projects.filter((p) => p.status === "archived");
                       </p>
                       <div class="flex flex-wrap gap-1">
                         {project.technologies.map((tech) => (
-                          <span class="inline-block bg-gray-800 text-gray-400 py-1 px-2 rounded text-xs mr-1 mt-1">{tech}</span>
+                          <span class="inline-block bg-gray-800 text-gray-400 py-1 px-2 rounded text-xs mr-1 mt-1">
+                            {tech}
+                          </span>
                         ))}
                       </div>
                     </div>
@@ -292,7 +293,9 @@ const archivedProjects = projects.filter((p) => p.status === "archived");
         maintenanceProjects.length > 0 && (
           <section>
             <div class="flex items-center gap-2 mb-4">
-              <h2 class="text-2xl font-semibold text-gray-100">In Maintenance</h2>
+              <h2 class="text-2xl font-semibold text-gray-100">
+                In Maintenance
+              </h2>
               <div class="info-icon cursor-help text-gray-500 text-base relative">
                 ⓘ
                 <div class="info-tooltip absolute bottom-[100%] left-1/2 -translate-x-1/2 mb-2 bg-gray-900 border border-gray-700 rounded-lg p-3 w-[250px] text-xs text-gray-400 opacity-0 pointer-events-none transition-opacity duration-200 z-100">
@@ -411,7 +414,9 @@ const archivedProjects = projects.filter((p) => p.status === "archived");
                       </p>
                       <div class="flex flex-wrap gap-1">
                         {project.technologies.map((tech) => (
-                          <span class="inline-block bg-gray-800 text-gray-400 py-1 px-2 rounded text-xs mr-1 mt-1">{tech}</span>
+                          <span class="inline-block bg-gray-800 text-gray-400 py-1 px-2 rounded text-xs mr-1 mt-1">
+                            {tech}
+                          </span>
                         ))}
                       </div>
                     </div>
@@ -427,7 +432,9 @@ const archivedProjects = projects.filter((p) => p.status === "archived");
         archivedProjects.length > 0 && (
           <section>
             <div class="flex items-center gap-2 mb-4">
-              <h2 class="text-2xl font-semibold text-gray-100">Past Projects</h2>
+              <h2 class="text-2xl font-semibold text-gray-100">
+                Past Projects
+              </h2>
             </div>
             <div class="flex flex-col gap-4">
               {archivedProjects.map((project) => (
@@ -539,7 +546,9 @@ const archivedProjects = projects.filter((p) => p.status === "archived");
                       </p>
                       <div class="flex flex-wrap gap-1">
                         {project.technologies.map((tech) => (
-                          <span class="inline-block bg-gray-800 text-gray-400 py-1 px-2 rounded text-xs mr-1 mt-1">{tech}</span>
+                          <span class="inline-block bg-gray-800 text-gray-400 py-1 px-2 rounded text-xs mr-1 mt-1">
+                            {tech}
+                          </span>
                         ))}
                       </div>
                     </div>
