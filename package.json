@@ -10,19 +10,19 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/sitemap": "^3.7.4",
+    "@astrojs/sitemap": "^3.7.5",
     "@iconify-json/academicons": "^1.2.4",
     "@iconify-json/ri": "^1.2.10",
-    "astro": "^7.4.5",
+    "astro": "^7.4.12",
     "astro-icon": "^1.2.0",
     "zod": "^4.6.7"
   },
   "devDependencies": {
-    "@unocss/astro": "^66.12.0",
-    "@unocss/postcss": "^66.12.0",
-    "@unocss/preset-uno": "^66.12.0",
-    "@unocss/reset": "^66.12.0",
+    "@unocss/astro": "^66.13.0",
+    "@unocss/postcss": "^66.13.0",
+    "@unocss/preset-uno": "^66.13.0",
+    "@unocss/reset": "^66.13.0",
     "typescript": "^7.0.2",
-    "unocss": "^66.12.0"
+    "unocss": "^66.13.0"
   }
 }
